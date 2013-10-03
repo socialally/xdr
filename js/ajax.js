@@ -118,15 +118,14 @@
       if(!cors) {
         req.open(method, url);
         req.onload = function() {
-          alert('ie loaded:' + req.responseText);
-          alert('ie status: ' + req.status);
-          var res = {status: this.status || 200, xhr: this};
-          //res.headers = parse(this.getAllResponseHeaders());
-          res.headers = null;
+          var res = {status: this.status || 200, xhr: this, headers: null};
           res.data = convert(this.responseText);
           response(res);
         };
-        req.onerror = function() {alert('ie error...')};
+        req.onerror = function() {
+          var res = {status: this.status || 500, xhr: this, headers: null};
+          response(res);
+        };
         req.ontimeout = req.onprogress = function(){};
       }else{
         //alert('using cors...');
