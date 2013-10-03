@@ -92,7 +92,12 @@
     if(ie) {
       req.open(method, url);
       req.onload = function() {
-        alert('ie loaded:' + req.responseText)
+        alert('ie loaded:' + this.responseText)
+        var res = {status: this.status || 200, xhr: this};
+        //res.headers = parse(this.getAllResponseHeaders());
+        res.headers = null;
+        res.data = convert(this.responseText);
+        response(res);
       };
       req.onerror = function() {alert('ie error...')};
       req.ontimeout = req.onprogress = function(){};
