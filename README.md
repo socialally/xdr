@@ -47,6 +47,8 @@ Browsers marked with an asterisk have partial support:
 
 * Safari 5 does not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
 * Response headers are not available to IE browsers using the `XDomainRequest` object.
+* The `async` option is ignored for `XDomainRequest` instances.
+* Authentication credentials may not be used with `XDomainRequest`.
 
 ## Appendix
 
