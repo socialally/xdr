@@ -37,16 +37,18 @@ Then run the tests in a browser:
 
 Browsers marked with an asterisk have partial support:
 
-* Chrome 31.0.1650.4 dev
-* Firefox 24.0
-* Opera 12.16
-* Opera 16.0.1196.80
+* Chrome 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 beta, 31 dev
+* Firefox 21, 22, 23, 24, 25 beta, 25 aurora
+* Opera 12.16 - 16.0.1196.80, 17.0 next, 18.0 dev
 * Safari 6.0.5 (8536.30.1)
+
 * Safari 5.1.10 (6534.59.10) *
+* Chrome 14, 16, 17 *
 
 ## Partial Support
 
-* Safari 5 does not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
+* Firefox 4-20 do not expose cross domain response headers using `getAllResponseHeaders()`.
+* Safari 5/5.1, Chrome 14, 16 ,17 do not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
 * Response headers are not available to IE browsers using the `XDomainRequest` object.
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.

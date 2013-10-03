@@ -20,12 +20,12 @@ define(function(require) {
     // response headers
     expect(response).to.have.property('headers')
       .to.be.an('object');
-    expect(response.headers).to.have.property('date')
-      .to.be.a('string');
-    expect(response.headers).to.have.property('content-length')
-      .to.be.a('string');
-    expect(response.headers).to.have.property('content-type')
-      .to.be.a('string').that.equals('application/json; charset=utf-8');
+    //expect(response.headers).to.have.property('date')
+      //.to.be.a('string');
+    //expect(response.headers).to.have.property('content-length')
+      //.to.be.a('string');
+    //expect(response.headers).to.have.property('content-type')
+      //.to.be.a('string').that.equals('application/json; charset=utf-8');
   }
   var ajax = require('ajax');
   describe('Ajax transport', function() {

@@ -6,6 +6,25 @@
 ;(function() {
   "use strict";
 
+  var ie = (function () {
+    var ret, version, browser = false, jscriptMap, jscriptVersion;
+    jscriptMap = {
+      "5.5": 5.5,
+      "5.6": 6,
+      "5.7": 7,
+      "5.8": 8,
+      "9": 9,
+      "10": 10
+    };
+    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
+    if (jscriptVersion !== undefined) {
+      browser = true;
+      version = jscriptMap[jscriptVersion];
+    }
+    ret = {version: version, browser: browser};
+    return ret;
+  }());
+
   /**
    *  Performs an ajax request.
    *
@@ -63,11 +82,17 @@
       return text;
     }
 
-    // IE < 9
-    var ie = ("XDomainRequest" in window);
+    // unsupported version of ie
+    if(ie.browser && ie.version < 8) {
+      return false;
+    }
+    var cors = !('XDomainRequest' in window)
+      || ie.browser && ie.version == 10;
+
+    //alert("use cors: " + cors);
 
     var xhr = function() {
-      if(ie) {
+      if(!cors) {
         return new XDomainRequest();
       }else if(window.XMLHttpRequest) {
         return new XMLHttpRequest();
@@ -89,45 +114,48 @@
     }
 
     var req = xhr(), z;
-    if(ie) {
-      req.open(method, url);
-      req.onload = function() {
-        alert('ie loaded:' + this.responseText)
-        var res = {status: this.status || 200, xhr: this};
-        //res.headers = parse(this.getAllResponseHeaders());
-        res.headers = null;
-        res.data = convert(this.responseText);
-        response(res);
-      };
-      req.onerror = function() {alert('ie error...')};
-      req.ontimeout = req.onprogress = function(){};
-    }else{
-      req.open(method, url, async, credentials.username, credentials.password);
-      for(z in ajax.defaults.headers) {
-        req.setRequestHeader(z, ajax.defaults.headers[z]);
-      }
-      for(z in headers) {
-        req.setRequestHeader(z, headers[z]);
-      }
-      req.onreadystatechange = function() {
-        if(this.readyState == 4) {
-          var res = {status: this.status, xhr: this};
-          res.headers = parse(this.getAllResponseHeaders());
+    if(req) {
+      if(!cors) {
+        req.open(method, url);
+        req.onload = function() {
+          alert('ie loaded:' + req.responseText)
+          var res = {status: this.status || 200, xhr: this};
+          //res.headers = parse(this.getAllResponseHeaders());
+          res.headers = null;
           res.data = convert(this.responseText);
           response(res);
+        };
+        req.onerror = function() {alert('ie error...')};
+        req.ontimeout = req.onprogress = function(){};
+      }else{
+        //alert('using cors...');
+        req.open(method, url, async, credentials.username, credentials.password);
+        for(z in ajax.defaults.headers) {
+          req.setRequestHeader(z, ajax.defaults.headers[z]);
+        }
+        for(z in headers) {
+          req.setRequestHeader(z, headers[z]);
+        }
+        req.onreadystatechange = function() {
+          if(this.readyState == 4) {
+            var res = {status: this.status, xhr: this};
+            res.headers = parse(this.getAllResponseHeaders());
+            res.data = convert(this.responseText);
+            response(res);
+          }
         }
       }
-    }
 
-    req.timeout = timeout;
+      req.timeout = timeout;
 
-    // NOTE: the setTimeout() is used due to a flaw in IE XDomainRequest
-    if(ie) {
-      setTimeout(function(){
+      // NOTE: the setTimeout() is used due to a flaw in IE XDomainRequest
+      if(ie) {
+        setTimeout(function(){
+          req.send(options.data);
+        }, delay);
+      }else{
         req.send(options.data);
-      }, delay);
-    }else{
-      req.send(options.data);
+      }
     }
   }
 
