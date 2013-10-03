@@ -13,23 +13,26 @@
    *  @param options.url The URL to connect to.
    *  @param options.headers An object containing HTTP headers.
    *  @param options.timeout A timeout for the request in milliseconds.
+   *  @param options.delay A delay before invoking send() in milliseconds.
    *  @param options.data Data to send with the request.
    *  @param options.credentials Authentication credentials.
+   *  @param options.success A callback for 2xx responses.
+   *  @param options.error A callback for error responses.
    */
   var ajax = function(options) {
     var url = options.url;
     var method = options.method || ajax.defaults.method;
     var headers = options.headers || {};
     var timeout = options.timeout || ajax.defaults.timeout;
+    var delay = options.delay || ajax.defaults.delay;
     var credentials = options.credentials || {};
     var req;
 
     // IE < 9
-    var ie = "XDomainRequest" in window;
+    var ie = ("XDomainRequest" in window);
 
     var xhr = function() {
       if(ie) {
-        //console.log("run as IE...");
         return new XDomainRequest();
       }else if(window.XMLHttpRequest) {
         return new XMLHttpRequest();
@@ -37,8 +40,17 @@
       return null;
     }
 
-    var response = function() {
-
+    var response = function(response) {
+      var status = "" + (response.status || 0);
+      if(/^2/.test(status)) {
+        if(typeof(options.success) == 'function') {
+          options.success(response, response.xhr);
+        }
+      }else{
+        if(typeof(options.error) == 'function') {
+          options.error(response, response.xhr);
+        }
+      }
     }
 
     var req = xhr(), z;
@@ -52,18 +64,18 @@
     req.onreadystatechange = function() {
       if(req.readyState == 4) {
         console.log("request complete...");
+        var res = {status: req.status, xhr: req};
+        response(res);
       }
     }
 
-    //console.log("sending data..." + options.data );
-    //
     req.timeout = timeout;
 
     // NOTE: the setTimeout() is used due to a flaw in IE XDomainRequest
     if(ie) {
       setTimeout(function(){
         req.send(options.data);
-      }, 0);
+      }, delay);
     }else{
       req.send(options.data);
     }
@@ -75,6 +87,7 @@
   ajax.defaults = {
     method: 'get',
     timeout: 10000,
+    delay: 0,
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
