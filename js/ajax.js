@@ -118,7 +118,7 @@
       if(!cors) {
         req.open(method, url);
         req.onload = function() {
-          alert('ie loaded:' + req.responseText)
+          alert('ie loaded:' + req.responseText);
           var res = {status: this.status || 200, xhr: this};
           //res.headers = parse(this.getAllResponseHeaders());
           res.headers = null;
