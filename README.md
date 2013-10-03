@@ -41,6 +41,7 @@ Browsers marked with an asterisk have partial support:
 * Firefox 24.0
 * Opera 12.16
 * Opera 16.0.1196.80
+* Safari 6.0.5 (8536.30.1)
 * Safari 5.1.10 (6534.59.10) *
 
 ## Partial Support
@@ -71,6 +72,7 @@ simple headers are accessible:
 * [CORS](http://www.w3.org/TR/cors/)
 * [XDomainRequest](http://msdn.microsoft.com/en-us/library/ie/cc288060(v=vs.85).aspx)
 * [XDomainRequest Limitations](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx)
+* [XDomainRequest Quirks](http://cypressnorth.com/programming/internet-explorer-aborting-ajax-requests-fixed/)
 * [test-cors.org](http://test-cors.org)
 * [express+cors](https://npmjs.org/package/cors)
 * [jquery+ajax](http://api.jquery.com/jQuery.ajax/)
