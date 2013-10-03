@@ -93,12 +93,19 @@
     for(z in headers) {
       req.setRequestHeader(z, headers[z]);
     }
-    req.onreadystatechange = function() {
-      if(this.readyState == 4) {
-        var res = {status: this.status, xhr: this};
-        res.headers = parse(this.getAllResponseHeaders());
-        res.data = convert(this.responseText);
-        response(res);
+
+    if(ie) {
+      req.onload = function() {alert('ie loaded...')};
+      req.onerror = function() {alert('ie error...')};
+      req.ontimeout = req.onprogress = function(){};
+    }else{
+      req.onreadystatechange = function() {
+        if(this.readyState == 4) {
+          var res = {status: this.status, xhr: this};
+          res.headers = parse(this.getAllResponseHeaders());
+          res.data = convert(this.responseText);
+          response(res);
+        }
       }
     }
 
