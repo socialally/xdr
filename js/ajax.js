@@ -21,7 +21,7 @@
 
     var xhr = function() {
       if(ie) {
-        console.log("run as IE...");
+        //console.log("run as IE...");
         return new XDomainRequest();
       }else if(window.XMLHttpRequest) {
         return new XMLHttpRequest();
@@ -45,7 +45,9 @@
       }
     }
     console.log("sending data..." + options.data );
-    req.send(options.data);
+    setTimeout(function(){
+      req.send(options.data);
+    }, 0);
   }
 
   if (typeof module === "object" && typeof module.exports === "object") {
