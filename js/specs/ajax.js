@@ -4,7 +4,6 @@ define(function(require) {
   describe('Ajax client', function() {
     it('should receive echo response on same domain', function(done) {
       var success = function(response, xhr) {
-        //console.log("got success...");
         expect(response).to.have.property('status')
           .to.be.a('number').that.equals(200);
         expect(xhr).to.be.an('object');
@@ -12,7 +11,10 @@ define(function(require) {
           .to.be.an('object');
         expect(response.headers).to.have.property('date')
           .to.be.a('string');
-        console.log("got headers: '" + response.headers.date + "'");
+        expect(response.headers).to.have.property('content-length')
+          .to.be.a('string');
+        expect(response.headers).to.have.property('content-type')
+          .to.be.a('string').that.equals('application/json');
         done();
       }
 
