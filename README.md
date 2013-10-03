@@ -16,14 +16,15 @@ And configure a reverse proxy, for example using [nginx](http://nginx.org):
 
 ```
 server {
-  listen       80;
-  server_name  xdomain.socialal.ly;
+  listen 80;
+  server_name xdomain.socialal.ly;
   location / {
+    proxy_http_version  1.1;
     proxy_redirect      off;
-    proxy_set_header    Host            $host;
+    proxy_set_header    Host $http_host;
     proxy_set_header    X-Real-IP       $remote_addr;
     proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_pass http://127.0.0.1:9080;
+    proxy_pass          http://127.0.0.1:9080;
   }
 }
 ```
