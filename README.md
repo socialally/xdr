@@ -64,6 +64,9 @@ simple headers are accessible:
 ### Related Links
 
 * [XMLHttpRequest2](http://www.w3.org/TR/XMLHttpRequest2/)
+* [XMLHttpRequest - Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)
 * [CORS](http://www.w3.org/TR/cors/)
+* [XDomainRequest](http://msdn.microsoft.com/en-us/library/ie/cc288060(v=vs.85).aspx)
 * [test-cors.org](http://test-cors.org)
 * [express+cors](https://npmjs.org/package/cors)
+* [jquery+ajax](http://api.jquery.com/jQuery.ajax/)
