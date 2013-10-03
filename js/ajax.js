@@ -28,6 +28,32 @@
     var credentials = options.credentials || {};
     var req;
 
+    /**
+     *  Parse response headers into an object.
+     *
+     *  @param headers The response headers as a string.
+     *
+     *  @return An object encapsulating the response headers.
+     */
+    var parse = function(headers) {
+      //console.log("got headers: " + headers);
+      var output = {}, i, p, k, v;
+      headers = headers || "";
+      headers = headers.replace('\r', '');
+      headers = headers.split('\n');
+      for(i = 0;i < headers.length;i++) {
+        p = headers[i].indexOf(':');
+        k = headers[i].substr(0, p);
+        v = headers[i].substr(p + 1);
+        if(k && v) {
+          k = k.replace(/^\s+/, '').replace(/\s+$/, '');
+          v = v.replace(/^\s+/, '').replace(/\s+$/, '');
+          output[k.toLowerCase()] = v;
+        }
+      }
+      return output;
+    }
+
     // IE < 9
     var ie = ("XDomainRequest" in window);
 
@@ -63,8 +89,8 @@
     }
     req.onreadystatechange = function() {
       if(req.readyState == 4) {
-        console.log("request complete...");
         var res = {status: req.status, xhr: req};
+        res.headers = parse(req.getAllResponseHeaders());
         response(res);
       }
     }
@@ -93,7 +119,7 @@
     }
   }
 
-  if(typeof module === "object" && typeof module.exports === "object") {
+  if(typeof(module) === "object" && typeof(module.exports) === "object") {
     module.exports = ajax;
   }else if(typeof(define) == 'function' && define.amd) {
     define("ajax", [], function () { return ajax; });
