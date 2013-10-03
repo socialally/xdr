@@ -18,6 +18,7 @@
    *  @param options.credentials Authentication credentials.
    *  @param options.success A callback for 2xx responses.
    *  @param options.error A callback for error responses.
+   *  @param options.mime A MIME type passed to overrideMimeType().
    */
   var ajax = function(options) {
     var url = options.url;

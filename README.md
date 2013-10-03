@@ -60,3 +60,10 @@ simple headers are accessible:
 * Expires
 * Last-Modified
 * Pragma
+
+### Related Links
+
+* [XMLHttpRequest2](http://www.w3.org/TR/XMLHttpRequest2/)
+* [CORS](http://www.w3.org/TR/cors/)
+* [test-cors.org](http://test-cors.org)
+* [express+cors](https://npmjs.org/package/cors)
