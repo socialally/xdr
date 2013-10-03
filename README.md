@@ -2,6 +2,8 @@
 
 This implementation must support cross domain communication and work in as many browsers as possible including IE8.
 
+Run `npm install` to resolve dependencies.
+
 ## Test
 
 Map the domain `xdomain.socialal.ly` in `/etc/hosts`:
@@ -26,6 +28,11 @@ server {
 }
 ```
 
-1. `npm install`
-2. `npm start`
-3. `npm test` or visit `http://localhost:9080`
+Then run the tests in a browser:
+
+1. `npm start` - Start the mock server.
+2. Visit `http://localhost:9080`
+
+## Caveats
+
+Safari 5 does not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
