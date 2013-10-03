@@ -34,6 +34,8 @@ Then run the tests in a browser:
 1. `npm start` - Start the mock server.
 2. Visit `http://localhost:9080`
 
+Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to verify you need to visit: `http://localhost:9080/standalone.html`.
+
 ## Browser Compatibility
 
 ### Full Support
