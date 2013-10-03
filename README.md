@@ -35,31 +35,38 @@ Then run the tests in a browser:
 
 ## Browser Compatibility
 
-Browsers marked with an asterisk have partial support:
+### Full Support
 
-* Chrome 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 beta, 31 dev
-* Firefox 21, 22, 23, 24, 25 beta, 25 aurora
-* Opera 12.16 - 16.0.1196.80, 17.0 next, 18.0 dev
-* Safari 6.0.5 (8536.30.1)
+Full support is deemed to be browsers that can make cross domain requests and access the response headers:
 
-* Safari 5.1.10 (6534.59.10) *
-* Chrome 14, 16, 17 *
+* Chrome 18+
+* Safari 6+
+* Firefox 21+
+* Opera 12+
+* Internet Explorer 10+
 
-## Partial Support
+### Partial Support
 
+* Chrome 14-17 and Safari 5/5.1 do not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
 * Firefox 4-20 do not expose cross domain response headers using `getAllResponseHeaders()`.
-* Safari 5/5.1, Chrome 14, 16 ,17 do not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
-* Response headers are not available to IE browsers using the `XDomainRequest` object.
+* Internet Explorer 8/9 have many restrictions see [XDomainRequest](#xdomainrequest).
+
+### XDomainRequest (IE 8/9)
+
+* Response headers are not available to browsers using the `XDomainRequest` object.
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.
+* `XDomainRequest` cannot set request headers, specifically no `Content-Type` header may be set.
+
+### Known Issues
+
 * IE10 does not send cookies when withCredential=true [IE Bug #759587](https://connect.microsoft.com/IE/feedback/details/759587/ie10-doesnt-support-cookies-on-cross-origin-xmlhttprequest-withcredentials-true)
 
 ## Appendix
 
 ### Simple Headers
 
-When a browser does not support exposing response headers only the following
-simple headers are accessible:
+When a browser does not support exposing response headers only the following simple headers are accessible:
 
 * Cache-Control
 * Content-Language
