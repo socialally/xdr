@@ -36,7 +36,6 @@
      *  @return An object encapsulating the response headers.
      */
     var parse = function(headers) {
-      //console.log("got headers: " + headers);
       var output = {}, i, p, k, v;
       headers = headers || "";
       headers = headers.replace('\r', '');
@@ -52,6 +51,12 @@
         }
       }
       return output;
+    }
+
+    var convert = function(text) {
+      //console.log("convert text: " + text);
+      //console.log("convert text: " + options.type);
+      return text;
     }
 
     // IE < 9
@@ -88,9 +93,10 @@
       req.setRequestHeader(z, headers[z]);
     }
     req.onreadystatechange = function() {
-      if(req.readyState == 4) {
-        var res = {status: req.status, xhr: req};
-        res.headers = parse(req.getAllResponseHeaders());
+      if(this.readyState == 4) {
+        var res = {status: this.status, xhr: this};
+        res.headers = parse(this.getAllResponseHeaders());
+        res.data = convert(this.responseText);
         response(res);
       }
     }
