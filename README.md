@@ -46,3 +46,17 @@ Browsers marked with an asterisk have partial support:
 ## Partial Support
 
 * Safari 5 does not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
+
+## Appendix
+
+### Simple Headers
+
+When a browser does not support exposing response headers only the following
+simple headers are accessible:
+
+* Cache-Control
+* Content-Language
+* Content-Type
+* Expires
+* Last-Modified
+* Pragma
