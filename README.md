@@ -50,6 +50,7 @@ Browsers marked with an asterisk have partial support:
 * Response headers are not available to IE browsers using the `XDomainRequest` object.
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.
+* IE10 does not send cookies when withCredential=true [IE Bug #759587](https://connect.microsoft.com/IE/feedback/details/759587/ie10-doesnt-support-cookies-on-cross-origin-xmlhttprequest-withcredentials-true)
 
 ## Appendix
 
