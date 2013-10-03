@@ -19,6 +19,7 @@
    *  @param options.success A callback for 2xx responses.
    *  @param options.error A callback for error responses.
    *  @param options.mime A MIME type passed to overrideMimeType().
+   *  @param options.async Whether the request is asynchronous.
    */
   var ajax = function(options) {
     var url = options.url;
@@ -26,6 +27,8 @@
     var headers = options.headers || {};
     var timeout = options.timeout || ajax.defaults.timeout;
     var delay = options.delay || ajax.defaults.delay;
+    var async = (typeof(options.async) == 'boolean') ? options.async
+       : ajax.defaults.async;
     var credentials = options.credentials || {};
     var req;
 
@@ -86,19 +89,21 @@
     }
 
     var req = xhr(), z;
-    req.open(method, url, true, credentials.username, credentials.password);
-    for(z in ajax.defaults.headers) {
-      req.setRequestHeader(z, ajax.defaults.headers[z]);
-    }
-    for(z in headers) {
-      req.setRequestHeader(z, headers[z]);
-    }
-
     if(ie) {
-      req.onload = function() {alert('ie loaded...')};
+      req.open(method, url);
+      req.onload = function() {
+        alert('ie loaded:' + req.responseText)
+      };
       req.onerror = function() {alert('ie error...')};
       req.ontimeout = req.onprogress = function(){};
     }else{
+      req.open(method, url, async, credentials.username, credentials.password);
+      for(z in ajax.defaults.headers) {
+        req.setRequestHeader(z, ajax.defaults.headers[z]);
+      }
+      for(z in headers) {
+        req.setRequestHeader(z, headers[z]);
+      }
       req.onreadystatechange = function() {
         if(this.readyState == 4) {
           var res = {status: this.status, xhr: this};
@@ -128,6 +133,7 @@
     method: 'get',
     timeout: 10000,
     delay: 0,
+    async: true,
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
