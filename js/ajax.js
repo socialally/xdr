@@ -12,6 +12,8 @@
     var url = options.url;
     var method = options.method || 'get';
     var headers = options.headers || {};
+    headers['X-Requested-With'] = 'XMLHttpRequest';
+    var credentials = options.credentials || {};
     var req;
 
     // IE < 9
@@ -32,9 +34,18 @@
     }
 
     var req = xhr();
-
-
-
+    req.open(method, url, true, credentials.username, credentials.password);
+    console.log('got req...' + req);
+    for(var z in headers) {
+      req.setRequestHeader(z, headers[z]);
+    }
+    req.onreadystatechange = function() {
+      if(req.readyState == 4) {
+        console.log("request complete...");
+      }
+    }
+    console.log("sending data..." + options.data );
+    req.send(options.data);
   }
 
   if (typeof module === "object" && typeof module.exports === "object") {
