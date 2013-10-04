@@ -44,6 +44,12 @@ http://localhost:9080/standalone.html
 
 To create a minified version of the library run `npm run minify`.
 
+## Server Implementation
+
+The server must at a minimum send the appropriate headers for CORS support, see [server.js](lib/server.js) for example headers.
+
+In addition, in order to support the `XDomainRequest` object for IE 8/9 the server must process requests *that do not contain a Content-Type header* and the client must know the type of data the server responds with. 
+
 ## Browser Compatibility
 
 ### Full Support
