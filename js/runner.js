@@ -16,9 +16,9 @@ require(['require', 'chai', 'mocha'], function(require, chai){
   mocha.setup('bdd');
 
   require([
-    'js/specs/json-post.js',
+    'js/specs/jsonp.js',
     'js/specs/json-get.js',
-    'js/specs/jsonp.js'
+    'js/specs/json-post.js'
   ], function(require) {
     if(window.mochaPhantomJS) {
       mochaPhantomJS.run();

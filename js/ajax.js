@@ -254,7 +254,7 @@
    *  requests, default is 'callback'.
    */
   var ajax = function(options) {
-    var req, z, jsp = false;
+    var req, z, jsp = false, data;
     // no options or no json capability (IE7 etc.)
     if(!(typeof(options) == 'object') || !('JSON' in window) ) {
       return false;
@@ -282,15 +282,13 @@
     // TODO: copy data so as not to affect the source data
     if(options.data) {
       var encoder = converters[type].encode;
-      options.data = encoder(options.data);
+      data = encoder(options.data);
     }
 
     // send the data as a query string parameter
-    if(options.data && (jsp || (typeof(options.parameter) == 'string'))) {
+    if(data && (jsp || (typeof(options.parameter) == 'string'))) {
       options.params = options.params || {};
-      options.params[options.parameter || ajax.defaults.parameter] =
-        options.data;
-      //options.data = null;
+      options.params[options.parameter || ajax.defaults.parameter] = data;
     }
 
     var url = qs(options.url || "", options.params);
@@ -320,8 +318,7 @@
     // execute as jsonp
     if(jsp) {
       req = new jsonp(url, options);
-      console.log("run as jsonp...");
-      req.send(options.data);
+      req.send(data);
       url = req.url;
     // execute as ajax
     }else{
@@ -375,10 +372,10 @@
       req.timeout = (options.timeout || ajax.defaults.timeout);
       if(!cors) {
         setTimeout(function(){
-          req.send(options.data);
+          req.send(data);
         }, options.delay || ajax.defaults.delay);
       }else{
-        req.send(options.data);
+        req.send(data);
       }
     }
 
