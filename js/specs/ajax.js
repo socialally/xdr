@@ -3,10 +3,9 @@ define(function(require) {
   var error = function(response, xhr) {
     console.log('error: ' + response.status);
   }
-  var assert = function(response, xhr) {
+  var assert = function(response) {
     expect(response).to.have.property('status')
       .to.be.a('number').that.equals(200);
-    expect(xhr).to.be.an('object');
 
     // response data
     expect(response).to.have.property('data')

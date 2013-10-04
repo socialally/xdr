@@ -173,27 +173,32 @@
 
   /**
    *  JSONP implementation.
+   *
+   *  @param url The URL to make the request to.
+   *  @param options The configuration options.
    */
-  var jsonp = function(options) {
-    this.counter = -1;
+  var jsonp = function(url, options) {
+    this.url = url;
     this.options = options;
   }
+
+  jsonp.counter = -1;
 
   jsonp.prototype.send = function(message) {
     //console.log("send via jsonp");
     var self = this;
-    var packet = this.options.encoder.serialize(message);
+    var packet = this.options.encoder(message);
     //var id = this.socket.id;
-    var cb = '__jsonp_' + (++this.counter);
+    var cb = '__jsonp_' + (++jsonp.counter);
     //var u = this.options.host + this.options.endpoint.jsonp + this.options.ns;
     //u += "?callback=" + cb;
     //u += "&packet=" + encodeURIComponent(packet);
     var elem = createElement('script',{src: u});
     window[cb] = function (packet) {
-      if(packet) {
-        //var evt = packet.e || 'message';
-        //console.log('jsonp dispatch : ' + evt);
-        //self.socket.emit(evt, packet.p || packet);
+      if(typeof(self.options.success) == 'function') {
+        var res = {status: 200, xhr: self, headers: null};
+        res.data = packet;
+        self.options.success(res);
       }
     }
     var head = document.getElementsByTagName("head")[0]
@@ -223,6 +228,11 @@
   }
 
   /**
+   *  Declared for compatibility with XMLHttpRequest.
+   */
+  jsonp.prototype.abort = function(){};
+
+  /**
    *  Performs an ajax request.
    *
    *  @param options.method The HTTP method.
@@ -238,34 +248,41 @@
    *  @param options.async Whether the request is asynchronous.
    *  @param options.params Query string parameters to append to the URL.
    *  @param options.fields Properties to apply to the XMLHttpRequest.
+   *  @param options.parameter Send the data as the named query string
+   *  parameter.
    */
   var ajax = function(options) {
-
-    // unsupported browser version
-    if(!('JSON' in window)
-      || (ie.browser && ie.version < 8)
-      || (!('XMLHttpRequest' in window) && !('XDomainRequest' in window))) {
+    var req, z, jsp = false;
+    // no options or no json capability (IE7 etc.)
+    if(!(typeof(options) == 'object') || !('JSON' in window) ) {
       return false;
     }
 
-    var req, z, jsp = false;
+    var type = options.type || 'text';
+    // mutate type for jsonp
+    if(type == 'jsonp') {
+      jsp = true;
+      type = 'json';
+    }
+
+    // unsupported content type
+    if(!(type in converters)) {
+      return false;
+    }
+
+    // unsupported browser version
+    if(!jsp && ((ie.browser && ie.version < 8)
+      || (!('XMLHttpRequest' in window) && !('XDomainRequest' in window)))) {
+      return false;
+    }
+
     var url = qs(options.url || "", options.params);
     var method = options.method || ajax.defaults.method;
     var headers = options.headers || {};
     var async = (typeof(options.async) == 'boolean') ? options.async
        : ajax.defaults.async;
     options.credentials = options.credentials || {};
-    var type = options.type || 'text';
-    if(!(type in converters)) {
-      return false;
-    }
     var mime = converters[type].mime;
-
-    // mutate type for jsonp
-    if(type == 'jsonp') {
-      jsp = true;
-      type = 'json';
-    }
 
     // TODO: copy data so as not to affect the source data
     if(options.data) {
@@ -281,18 +298,20 @@
       var status = "" + (response.status || 0);
       if(/^2/.test(status)) {
         if(typeof(options.success) == 'function') {
-          options.success(response, response.xhr);
+          options.success(response);
         }
       }else{
         if(typeof(options.error) == 'function') {
-          options.error(response, response.xhr);
+          options.error(response);
         }
       }
     }
 
     // execute as jsonp
     if(jsp) {
+      req = new jsonp(url, options);
       console.log("run as jsonp...");
+      req.send(data);
     // execute as ajax
     }else{
       req = xhr();
@@ -349,7 +368,7 @@
     return {
       xhr: req,
       abort: req.abort,
-      core: cors,
+      cors: cors,
       ie: ie,
       url: url
     }
