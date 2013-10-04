@@ -10,8 +10,8 @@ define(function(require) {
 
     // response data
     expect(response).to.have.property('data')
-      .to.be.a('string');
-    var data = JSON.parse(response.data);
+      .to.be.an('object');
+    var data = response.data;
     expect(data).to.have.property('greeting')
       .to.be.a('string').that.equals('hello');
     expect(data).to.have.property('number')
@@ -38,10 +38,11 @@ define(function(require) {
       var opts = {
         url: '/echo',
         method: 'post',
+        type: 'json',
         headers: {
           'content-type': 'application/json'
         },
-        data: JSON.stringify(packet),
+        data: packet,
         success: success,
         error: error
       };
@@ -56,10 +57,11 @@ define(function(require) {
       var opts = {
         url: 'http://xdomain.socialal.ly/echo',
         method: 'post',
+        type: 'json',
         headers: {
           'content-type': 'application/json'
         },
-        data: JSON.stringify(packet),
+        data: packet,
         success: success,
         error: error
       };

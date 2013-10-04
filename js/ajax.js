@@ -125,9 +125,12 @@
    *  @param mime The corresponding mime type.
    */
   var convert = function(text, type, mime) {
-    //console.log("convert text: " + text);
-    //console.log("convert text: " + options.type);
-    return text;
+    var data = text;
+    if(converters[type]) {
+      var decoder = converters[type].decode;
+      data = decoder(data);
+    }
+    return data;
   }
 
   /**
@@ -179,6 +182,10 @@
       return false;
     }
     var mime = converters[type].mime;
+    if(options.data) {
+      var encoder = converters[type].encode;
+      options.data = encoder(options.data);
+    }
 
     // unsupported version of ie
     if(ie.browser && ie.version < 8) {
