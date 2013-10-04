@@ -15,7 +15,7 @@
       return doc;
     };
     window.DOMParser = Parser;
-  };
+  }
 
   /**
    *  Creates a DOM element.
@@ -130,7 +130,7 @@
       },
       decode: function(data) {
         var parser = new DOMParser();
-        return parser.parseFromString(data, "application/xml");
+        return parser.parseFromString(data, converters.xml.mime);
       }
     }
   }
@@ -186,12 +186,10 @@
   jsonp.prototype.send = function(message) {
     //console.log("send via jsonp");
     var self = this;
-    var packet = this.options.encoder(message);
-    //var id = this.socket.id;
-    var cb = '__jsonp_' + (++jsonp.counter);
-    //var u = this.options.host + this.options.endpoint.jsonp + this.options.ns;
-    //u += "?callback=" + cb;
-    //u += "&packet=" + encodeURIComponent(packet);
+    var cb = '__jsonp__' + (++jsonp.counter);
+    this.url += (u.indexOf('?') == -1) ? '?' : '&';
+    this.url += encodeURIComponent(this.options.jsonp)
+      + '=' + encodeURIComponent(cb);
     var elem = createElement('script',{src: u});
     window[cb] = function (packet) {
       if(typeof(self.options.success) == 'function') {
@@ -200,6 +198,7 @@
         self.options.success(res);
       }
     }
+
     var head = document.getElementsByTagName("head")[0]
       || document.documentElement;
     var done = false;
@@ -210,6 +209,7 @@
         head.removeChild(elem);
       }
     }
+
     // load handlers for all browsers
     elem.onload = elem.onreadystatechange = function() {
       if(!done
@@ -249,6 +249,8 @@
    *  @param options.fields Properties to apply to the XMLHttpRequest.
    *  @param options.parameter Send the data as the named query string
    *  parameter.
+   *  @param jsonp The name of the callback query string variable for jsonp
+   *  requests, default is 'callback'.
    */
   var ajax = function(options) {
     var req, z, jsp = false;
@@ -262,6 +264,7 @@
     if(type == 'jsonp') {
       jsp = true;
       type = 'json';
+      options.jsonp = options.jsonp || ajax.defaults.jsop;
     }
 
     // unsupported content type
@@ -275,18 +278,26 @@
       return false;
     }
 
+    // TODO: copy data so as not to affect the source data
+    if(options.data) {
+      var encoder = converters[type].encode;
+      options.data = encoder(options.data);
+    }
+
+    // send the data as a query string parameter
+    if(options.data && (jsp || (typeof(options.parameter) == 'string'))) {
+      options.params = options.params || {};
+      options.params[options.parameter || ajax.defaults.parameter] =
+        options.data;
+      //options.data = null;
+    }
+
     var url = qs(options.url || "", options.params);
     var method = options.method || ajax.defaults.method;
     var headers = options.headers || {};
     var async = (typeof(options.async) == 'boolean') ? options.async
        : ajax.defaults.async;
     options.credentials = options.credentials || {};
-
-    // TODO: copy data so as not to affect the source data
-    if(options.data) {
-      var encoder = converters[type].encode;
-      options.data = encoder(options.data);
-    }
 
     /**
      *  Generic response handler for invoking the
@@ -310,6 +321,7 @@
       req = new jsonp(url, options);
       console.log("run as jsonp...");
       req.send(data);
+      url = req.url;
     // execute as ajax
     }else{
       req = xhr();
@@ -360,7 +372,7 @@
         }
       }
       req.timeout = (options.timeout || ajax.defaults.timeout);
-      if(ie) {
+      if(!cors) {
         setTimeout(function(){
           req.send(options.data);
         }, options.delay || ajax.defaults.delay);
@@ -385,6 +397,11 @@
   ajax.ie = ie;
 
   /**
+   *  Expose the jsonp implementation.
+   */
+  ajax.jsonp = jsonp;
+
+  /**
    *  Expose type converters.
    */
   ajax.converters = converters;
@@ -397,6 +414,8 @@
     timeout: 10000,
     delay: 0,
     async: true,
+    parameter: 'packet',
+    jsonp: 'callback',
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
