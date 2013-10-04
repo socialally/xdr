@@ -18,6 +18,24 @@
   };
 
   /**
+   *  Creates a DOM element.
+   *
+   *  @param tag The tag name for the element.
+   *  @param attrs Attributes to assign to the element.
+   *  @param text Text to append as a child node.
+   *
+   *  @return The created DOM element.
+   */
+  var createElement = function(tag, attrs, text) {
+    var el = document.createElement(tag);
+    for(var z in attrs) {
+      el.setAttribute(z, attrs[z]);
+    }
+    if(text) el.appendChild(document.createTextNode(text));
+    return el;
+  }
+
+  /**
    *  Detect Internet Explorer version as we cannot feature detect
    *  using ('XDomainRequest' in window) as IE10 retains the
    *  obsolete XDomainRequest object.
@@ -152,6 +170,58 @@
     return null;
   }
 
+
+  /**
+   *  JSONP implementation.
+   */
+  var jsonp = function(options) {
+    this.counter = -1;
+    this.options = options;
+  }
+
+  jsonp.prototype.send = function(message) {
+    //console.log("send via jsonp");
+    var self = this;
+    var packet = this.options.encoder.serialize(message);
+    //var id = this.socket.id;
+    var cb = '__jsonp_' + (++this.counter);
+    //var u = this.options.host + this.options.endpoint.jsonp + this.options.ns;
+    //u += "?callback=" + cb;
+    //u += "&packet=" + encodeURIComponent(packet);
+    var elem = createElement('script',{src: u});
+    window[cb] = function (packet) {
+      if(packet) {
+        //var evt = packet.e || 'message';
+        //console.log('jsonp dispatch : ' + evt);
+        //self.socket.emit(evt, packet.p || packet);
+      }
+    }
+    var head = document.getElementsByTagName("head")[0]
+      || document.documentElement;
+    var done = false;
+    var cleanup = function() {
+      window[cb] = null;
+      delete window[cb];
+      if(head && elem.parentNode) {
+        head.removeChild(elem);
+      }
+    }
+    // load handlers for all browsers
+    elem.onload = elem.onreadystatechange = function() {
+      if(!done
+         && (!this.readyState
+           || this.readyState === "loaded"
+           || this.readyState === "complete")) {
+        done = true;
+        // handle memory leak in IE
+        elem.onload = elem.onreadystatechange = null;
+        cleanup();
+      }
+    };
+    // perform the request
+    head.insertBefore(elem, head.firstChild);
+  }
+
   /**
    *  Performs an ajax request.
    *
@@ -170,7 +240,15 @@
    *  @param options.fields Properties to apply to the XMLHttpRequest.
    */
   var ajax = function(options) {
-    var req, z;
+
+    // unsupported browser version
+    if(!('JSON' in window)
+      || (ie.browser && ie.version < 8)
+      || (!('XMLHttpRequest' in window) && !('XDomainRequest' in window))) {
+      return false;
+    }
+
+    var req, z, jsp = false;
     var url = qs(options.url || "", options.params);
     var method = options.method || ajax.defaults.method;
     var headers = options.headers || {};
@@ -182,16 +260,23 @@
       return false;
     }
     var mime = converters[type].mime;
+
+    // mutate type for jsonp
+    if(type == 'jsonp') {
+      jsp = true;
+      type = 'json';
+    }
+
+    // TODO: copy data so as not to affect the source data
     if(options.data) {
       var encoder = converters[type].encode;
       options.data = encoder(options.data);
     }
 
-    // unsupported version of ie
-    if(ie.browser && ie.version < 8) {
-      return false;
-    }
-
+    /**
+     *  Generic response handler for invoking the
+     *  callback functions.
+     */
     var response = function(response) {
       var status = "" + (response.status || 0);
       if(/^2/.test(status)) {
@@ -205,57 +290,60 @@
       }
     }
 
-    req = xhr();
-    if(!req) {return false;}
-    if(!cors) {
-
-      req.open(method, url);
-      req.onload = function() {
-        var res = {status: this.status || 200, xhr: this, headers: null};
-        res.data = convert(this.responseText, type, mime);
-        response(res);
-      };
-      req.onerror = function() {
-        var res = {status: this.status || 500, xhr: this, headers: null};
-        response(res);
-      };
-      req.ontimeout = req.onprogress = function(){};
+    // execute as jsonp
+    if(jsp) {
+      console.log("run as jsonp...");
+    // execute as ajax
     }else{
-      // apply custom fields, eg: withCredentials
-      if(options.fields) {
-        for(z in options.fields) {
-          req[z] = options.fields[z];
-        }
-      }
-      req.open(method, url, async,
-        options.credentials.username, options.credentials.password);
-
-      // set default headers
-      for(z in ajax.defaults.headers) {
-        req.setRequestHeader(z, ajax.defaults.headers[z]);
-      }
-
-      // apply custom request headers
-      for(z in headers) {
-        req.setRequestHeader(z, headers[z]);
-      }
-      req.onreadystatechange = function() {
-        if(this.readyState == 4) {
-          var res = {status: this.status, xhr: this};
-          res.headers = parse(this.getAllResponseHeaders());
+      req = xhr();
+      if(!cors) {
+        req.open(method, url);
+        req.onload = function() {
+          var res = {status: this.status || 200, xhr: this, headers: null};
           res.data = convert(this.responseText, type, mime);
           response(res);
+        };
+        req.onerror = function() {
+          var res = {status: this.status || 500, xhr: this, headers: null};
+          response(res);
+        };
+        req.ontimeout = req.onprogress = function(){};
+      }else{
+        // apply custom fields, eg: withCredentials
+        if(options.fields) {
+          for(z in options.fields) {
+            req[z] = options.fields[z];
+          }
+        }
+        req.open(method, url, async,
+          options.credentials.username, options.credentials.password);
+
+        // set default headers
+        for(z in ajax.defaults.headers) {
+          req.setRequestHeader(z, ajax.defaults.headers[z]);
+        }
+
+        // apply custom request headers
+        for(z in headers) {
+          req.setRequestHeader(z, headers[z]);
+        }
+        req.onreadystatechange = function() {
+          if(this.readyState == 4) {
+            var res = {status: this.status, xhr: this};
+            res.headers = parse(this.getAllResponseHeaders());
+            res.data = convert(this.responseText, type, mime);
+            response(res);
+          }
         }
       }
-    }
-
-    req.timeout = (options.timeout || ajax.defaults.timeout);
-    if(ie) {
-      setTimeout(function(){
+      req.timeout = (options.timeout || ajax.defaults.timeout);
+      if(ie) {
+        setTimeout(function(){
+          req.send(options.data);
+        }, options.delay || ajax.defaults.delay);
+      }else{
         req.send(options.data);
-      }, options.delay || ajax.defaults.delay);
-    }else{
-      req.send(options.data);
+      }
     }
 
     return {

@@ -30,7 +30,7 @@ define(function(require) {
   }
   var ajax = require('ajax');
   describe('Ajax transport', function() {
-    it('a POST to /echo should receive echo response on same domain', function(done) {
+    it('a POST to /echo should receive json response on same domain', function(done) {
       var success = function(response, xhr) {
         assert(response, xhr);
         done();
@@ -49,7 +49,7 @@ define(function(require) {
       ajax(opts);
     });
 
-    it('a POST to http://xdomain.socialal.ly/echo should receive echo response on cross domain', function(done) {
+    it('a POST to http://xdomain.socialal.ly/echo should receive json response on cross domain', function(done) {
       var success = function(response, xhr) {
         assert(response, xhr);
         done();
