@@ -1,8 +1,3 @@
-// SEE: http://www.w3.org/TR/2007/WD-XMLHttpRequest-20071026/
-// SEE: http://www.w3.org/TR/XMLHttpRequest2/
-// SEE: https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/client-side-javascript-reference/xmlhttprequest
-// SEE: XDomainRequest: http://msdn.microsoft.com/en-us/library/ie/cc288060(v=vs.85).aspx
-
 ;(function() {
   "use strict";
 
