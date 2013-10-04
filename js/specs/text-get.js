@@ -24,7 +24,7 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a POST to http://xdomain.socialal.ly/echo should receive json response on cross domain',
+    it('a GET to http://xdomain.socialal.ly/text/echo should receive json response on cross domain',
       function(done) {
         var success = function(response) {
           response.data = JSON.parse(response.data);
@@ -36,7 +36,8 @@ define(function(require) {
           type: 'text',
           data: JSON.stringify(packet),
           success: success,
-          error: error
+          error: error,
+          parameter: 'jsontext'
         };
         var info = ajax(opts);
         oninfo(info);
