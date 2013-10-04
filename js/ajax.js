@@ -110,7 +110,7 @@
   }
 
   /**
-   *  Converts response text info a response format.
+   *  Converts response text into a response format.
    *
    *  @param text The response text.
    *  @param type The expected response type identifer.
