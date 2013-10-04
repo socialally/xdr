@@ -18,7 +18,8 @@ require(['require', 'chai', 'mocha'], function(require, chai){
   require([
     'js/specs/jsonp.js',
     'js/specs/json-get.js',
-    'js/specs/json-post.js'
+    'js/specs/json-post.js',
+    'js/specs/text-get.js'
   ], function(require) {
     if(window.mochaPhantomJS) {
       mochaPhantomJS.run();
