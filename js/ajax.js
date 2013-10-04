@@ -1,7 +1,10 @@
 ;(function() {
   "use strict";
 
-  if(!window.DOMParser) {
+  /**
+   *  Polyfill for IE DOM XML parse.
+   */
+  if(!window.DOMParser && window.ActiveXObject) {
     var Parser = function(){};
     Parser.prototype.baseURI = null;
     Parser.prototype.parseFromString = function(xml, mime) {
@@ -128,6 +131,25 @@
   }
 
   /**
+   *  Constant indicating whether CORS is used or
+   *  whether the XDomainRequest object is used instead.
+   */
+  var cors = !('XDomainRequest' in window)
+    || ie.browser && ie.version == 10;
+
+  /**
+   *  Retrieve the object used to make the request.
+   */
+  var xhr = function() {
+    if(!cors) {
+      return new XDomainRequest();
+    }else if(window.XMLHttpRequest) {
+      return new XMLHttpRequest();
+    }
+    return null;
+  }
+
+  /**
    *  Performs an ajax request.
    *
    *  @param options.method The HTTP method.
@@ -142,33 +164,25 @@
    *  @param options.mime A MIME type passed to overrideMimeType().
    *  @param options.async Whether the request is asynchronous.
    *  @param options.params Query string parameters to append to the URL.
+   *  @param options.fields Properties to apply to the XMLHttpRequest.
    */
   var ajax = function(options) {
+    var req, z;
     var url = qs(options.url || "", options.params);
     var method = options.method || ajax.defaults.method;
     var headers = options.headers || {};
-    var timeout = options.timeout || ajax.defaults.timeout;
-    var delay = options.delay || ajax.defaults.delay;
     var async = (typeof(options.async) == 'boolean') ? options.async
        : ajax.defaults.async;
-    var credentials = options.credentials || {};
-    var req;
+    options.credentials = options.credentials || {};
+    var type = options.type || 'text';
+    if(!(type in converters)) {
+      return false;
+    }
+    var mime = converters[type].mime;
 
     // unsupported version of ie
     if(ie.browser && ie.version < 8) {
       return false;
-    }
-
-    var cors = !('XDomainRequest' in window)
-      || ie.browser && ie.version == 10;
-
-    var xhr = function() {
-      if(!cors) {
-        return new XDomainRequest();
-      }else if(window.XMLHttpRequest) {
-        return new XMLHttpRequest();
-      }
-      return null;
     }
 
     var response = function(response) {
@@ -184,13 +198,14 @@
       }
     }
 
-    var req = xhr(), z;
+    req = xhr();
     if(!req) {return false;}
     if(!cors) {
+
       req.open(method, url);
       req.onload = function() {
         var res = {status: this.status || 200, xhr: this, headers: null};
-        res.data = convert(this.responseText);
+        res.data = convert(this.responseText, type, mime);
         response(res);
       };
       req.onerror = function() {
@@ -199,10 +214,21 @@
       };
       req.ontimeout = req.onprogress = function(){};
     }else{
-      req.open(method, url, async, credentials.username, credentials.password);
+      // apply custom fields, eg: withCredentials
+      if(options.fields) {
+        for(z in options.fields) {
+          req[z] = options.fields[z];
+        }
+      }
+      req.open(method, url, async,
+        options.credentials.username, options.credentials.password);
+
+      // set default headers
       for(z in ajax.defaults.headers) {
         req.setRequestHeader(z, ajax.defaults.headers[z]);
       }
+
+      // apply custom request headers
       for(z in headers) {
         req.setRequestHeader(z, headers[z]);
       }
@@ -210,17 +236,17 @@
         if(this.readyState == 4) {
           var res = {status: this.status, xhr: this};
           res.headers = parse(this.getAllResponseHeaders());
-          res.data = convert(this.responseText);
+          res.data = convert(this.responseText, type, mime);
           response(res);
         }
       }
     }
 
-    req.timeout = timeout;
+    req.timeout = (options.timeout || ajax.defaults.timeout);
     if(ie) {
       setTimeout(function(){
         req.send(options.data);
-      }, delay);
+      }, options.delay || ajax.defaults.delay);
     }else{
       req.send(options.data);
     }
