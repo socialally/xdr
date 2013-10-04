@@ -1,6 +1,19 @@
 ;(function() {
   "use strict";
 
+  if(!window.DOMParser) {
+    var Parser = function(){};
+    Parser.prototype.baseURI = null;
+    Parser.prototype.parseFromString = function(xml, mime) {
+      var doc = new ActiveXObject("Microsoft.XMLDOM");
+      doc.async	= true;
+      doc.validateOnParse = false;
+      doc.loadXML(xml);
+      return doc;
+    };
+    window.DOMParser = Parser;
+  };
+
   /**
    *  Detect Internet Explorer version as we cannot feature detect
    *  using ('XDomainRequest' in window) as IE10 retains the
