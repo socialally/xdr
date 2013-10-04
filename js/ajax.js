@@ -94,7 +94,7 @@
    */
   var qs = function(url, params) {
     if(!params || !(typeof(params) == 'object')) return url;
-    var u = url;
+    var u = new String(url);
     var q = [];
     for(var z in params) {
       q.push(encodeURIComponent(z) + '=' + encodeURIComponent(params[z]));
@@ -184,13 +184,11 @@
   jsonp.counter = -1;
 
   jsonp.prototype.send = function(message) {
-    //console.log("send via jsonp");
     var self = this;
     var cb = '__jsonp__' + (++jsonp.counter);
     this.url += (this.url.indexOf('?') == -1) ? '?' : '&';
     this.url += encodeURIComponent(this.options.jsonp)
       + '=' + encodeURIComponent(cb);
-    console.log("url: " + this.url);
     var elem = createElement('script',{src: this.url});
     window[cb] = function (packet) {
       if(typeof(self.options.success) == 'function') {

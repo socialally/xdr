@@ -2,10 +2,8 @@ define(function(require) {
   var packet = {greeting: 'hello', number: 10};
   var error = require('util/error');
   var assert = require('util/assert');
+  var oninfo = require('util/oninfo');
   var ajax = require('ajax');
-  var clone = function() {
-
-  }
   describe('Jsonp transport', function() {
     it('a GET to /jsonp/echo should receive json response on same domain',
       function(done) {
@@ -21,7 +19,7 @@ define(function(require) {
           data: packet
         };
         var info = ajax(opts);
-        console.log(info);
+        oninfo(info);
       }
     );
     it('a GET to http://xdomain.socialal.ly/jsonp/echo should receive json response on cross domain',
@@ -37,7 +35,8 @@ define(function(require) {
           error: error,
           data: packet
         };
-        ajax(opts);
+        var info = ajax(opts);
+        oninfo(info);
       }
     );
     it('multiple GET to http://xdomain.socialal.ly/jsonp/echo should receive json response on cross domain',

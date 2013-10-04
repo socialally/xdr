@@ -2,6 +2,7 @@ define(function(require) {
   var packet = {greeting: 'hello', number: 10};
   var error = require('util/error');
   var assert = require('util/assert');
+  var oninfo = require('util/oninfo');
   var ajax = require('ajax');
   describe('Ajax transport', function() {
     it('a POST to /echo should receive json response on same domain',
@@ -21,7 +22,8 @@ define(function(require) {
           success: success,
           error: error
         };
-        ajax(opts);
+        var info = ajax(opts);
+        oninfo(info);
       }
     );
     it('a POST to http://xdomain.socialal.ly/echo should receive json response on cross domain',
@@ -41,7 +43,8 @@ define(function(require) {
           success: success,
           error: error
         };
-        ajax(opts);
+        var info = ajax(opts);
+        oninfo(info);
       }
     );
   });
