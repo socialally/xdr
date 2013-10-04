@@ -124,7 +124,7 @@
       }
     },
     xml: {
-      mime: 'text/xml',
+      mime: 'application/xml',
       encode: function(data) {
         return data;
       },
@@ -140,9 +140,8 @@
    *
    *  @param text The response text.
    *  @param type The expected response type identifer.
-   *  @param mime The corresponding mime type.
    */
-  var convert = function(text, type, mime) {
+  var convert = function(text, type) {
     var data = text;
     if(converters[type]) {
       var decoder = converters[type].decode;
@@ -282,7 +281,6 @@
     var async = (typeof(options.async) == 'boolean') ? options.async
        : ajax.defaults.async;
     options.credentials = options.credentials || {};
-    var mime = converters[type].mime;
 
     // TODO: copy data so as not to affect the source data
     if(options.data) {
@@ -319,7 +317,7 @@
         req.open(method, url);
         req.onload = function() {
           var res = {status: this.status || 200, xhr: this, headers: null};
-          res.data = convert(this.responseText, type, mime);
+          res.data = convert(this.responseText, type);
           response(res);
         };
         req.onerror = function() {
@@ -334,8 +332,13 @@
             req[z] = options.fields[z];
           }
         }
+
         req.open(method, url, async,
           options.credentials.username, options.credentials.password);
+
+        if(options.mime && (typeof(req.overrideMimeType) == 'function')) {
+          req.overrideMimeType(options.mime);
+        }
 
         // set default headers
         for(z in ajax.defaults.headers) {
@@ -346,11 +349,12 @@
         for(z in headers) {
           req.setRequestHeader(z, headers[z]);
         }
+
         req.onreadystatechange = function() {
           if(this.readyState == 4) {
             var res = {status: this.status, xhr: this};
             res.headers = parse(this.getAllResponseHeaders());
-            res.data = convert(this.responseText, type, mime);
+            res.data = convert(this.responseText, type);
             response(res);
           }
         }
@@ -370,7 +374,8 @@
       abort: req.abort,
       cors: cors,
       ie: ie,
-      url: url
+      url: url,
+      jsonp: jsp
     }
   }
 
