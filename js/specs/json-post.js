@@ -6,8 +6,8 @@ define(function(require) {
   describe('Ajax transport', function() {
     it('a POST to /echo should receive json response on same domain',
       function(done) {
-        var success = function(response, xhr) {
-          assert(response, xhr);
+        var success = function(response) {
+          assert(response);
           done();
         }
         var opts = {
@@ -26,8 +26,8 @@ define(function(require) {
     );
     it('a POST to http://xdomain.socialal.ly/echo should receive json response on cross domain',
       function(done) {
-        var success = function(response, xhr) {
-          assert(response, xhr);
+        var success = function(response) {
+          assert(response);
           done();
         }
         var opts = {

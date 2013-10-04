@@ -187,10 +187,11 @@
     //console.log("send via jsonp");
     var self = this;
     var cb = '__jsonp__' + (++jsonp.counter);
-    this.url += (u.indexOf('?') == -1) ? '?' : '&';
+    this.url += (this.url.indexOf('?') == -1) ? '?' : '&';
     this.url += encodeURIComponent(this.options.jsonp)
       + '=' + encodeURIComponent(cb);
-    var elem = createElement('script',{src: u});
+    console.log("url: " + this.url);
+    var elem = createElement('script',{src: this.url});
     window[cb] = function (packet) {
       if(typeof(self.options.success) == 'function') {
         var res = {status: 200, xhr: self, headers: null};
@@ -264,7 +265,7 @@
     if(type == 'jsonp') {
       jsp = true;
       type = 'json';
-      options.jsonp = options.jsonp || ajax.defaults.jsop;
+      options.jsonp = options.jsonp || ajax.defaults.jsonp;
     }
 
     // unsupported content type
@@ -320,7 +321,7 @@
     if(jsp) {
       req = new jsonp(url, options);
       console.log("run as jsonp...");
-      req.send(data);
+      req.send(options.data);
       url = req.url;
     // execute as ajax
     }else{
