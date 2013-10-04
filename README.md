@@ -62,6 +62,7 @@ Full support is deemed to be browsers that can make cross domain requests and ac
 
 ### XDomainRequest (IE 8/9)
 
+* Only `GET` and `POST` methods are allowed. 
 * Response headers are not available to browsers using the `XDomainRequest` object.
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.
