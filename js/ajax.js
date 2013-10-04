@@ -7,8 +7,8 @@
    *  obsolete XDomainRequest object.
    */
   var ie = (function () {
-    var ret, version, browser = false, jscriptMap, jscriptVersion;
-    jscriptMap = {
+    var version = 0, browser = false, map, jscript;
+    map = {
       "5.5": 5.5,
       "5.6": 6,
       "5.7": 7,
@@ -16,13 +16,12 @@
       "9": 9,
       "10": 10
     };
-    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
-    if (jscriptVersion !== undefined) {
+    jscript = new Function("/*@cc_on return @_jscript_version; @*/")();
+    if (jscript !== undefined) {
       browser = true;
-      version = jscriptMap[jscriptVersion];
+      version = map[jscript];
     }
-    ret = {version: version, browser: browser};
-    return ret;
+    return {version: version, browser: browser};
   }());
 
   /**
