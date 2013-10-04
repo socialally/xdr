@@ -34,7 +34,7 @@ Then run the tests in a browser:
 1. `npm start` - Start the mock server.
 2. Visit `http://localhost:9080`
 
-Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to verify you need to visit:
+Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to test you need to visit:
 
 ```
 http://localhost:9080/standalone.html
@@ -56,7 +56,7 @@ Full support is deemed to be browsers that can make cross domain requests and ac
 
 * Chrome 14-17 and Safari 5/5.1 do not respect the `Access-Control-Expose-Headers` response header so assertions fail on the response headers.
 * Firefox 4-20 do not expose cross domain response headers using `getAllResponseHeaders()`.
-* Internet Explorer 8/9 have many restrictions see [XDomainRequest](#xdomainrequest).
+* Internet Explorer 8/9 have many restrictions see [XDomainRequest](#xdomainrequest-ie-89).
 
 ### XDomainRequest (IE 8/9)
 
