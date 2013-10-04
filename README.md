@@ -1,6 +1,6 @@
 # Ajax Implementation
 
-A cross-browser, cross-domain Ajax implementation. 
+An AMD compatible cross-browser, cross-domain Ajax implementation. 
 
 Run `npm install` to resolve dependencies.
 
