@@ -1,8 +1,15 @@
 # Ajax Implementation
 
-This implementation must support cross domain communication and work in as many browsers as possible including IE8.
+A cross-browser, cross-domain Ajax implementation. 
 
 Run `npm install` to resolve dependencies.
+
+## Design Goals
+
+* Must support IE 8/9.
+* Must be able to load resources cross-domain.
+* Must support text, json, xml and jsonp.
+* Must be as lightweight as possible.
 
 ## Test
 
