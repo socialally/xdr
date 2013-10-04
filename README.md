@@ -8,7 +8,7 @@ Run `npm install` to resolve dependencies.
 
 * Must support IE 8/9.
 * Must be able to load resources cross-domain.
-* Must support text, json, xml and jsonp.
+* Must support text, json, and jsonp.
 * Must be as lightweight as possible, ~4KB minified.
 
 ## Test

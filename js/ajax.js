@@ -2,22 +2,6 @@
   "use strict";
 
   /**
-   *  Polyfill for IE DOM XML parse.
-   */
-  if(!window.DOMParser && window.ActiveXObject) {
-    var Parser = function(){};
-    Parser.prototype.baseURI = null;
-    Parser.prototype.parseFromString = function(xml, mime) {
-      var doc = new ActiveXObject("Microsoft.XMLDOM");
-      doc.async	= true;
-      doc.validateOnParse = false;
-      doc.loadXML(xml);
-      return doc;
-    };
-    window.DOMParser = Parser;
-  }
-
-  /**
    *  Creates a DOM element.
    *
    *  @param tag The tag name for the element.
@@ -121,16 +105,6 @@
       },
       decode: function(data) {
         return JSON.parse(data);
-      }
-    },
-    xml: {
-      mime: 'application/xml',
-      encode: function(data) {
-        return data;
-      },
-      decode: function(data) {
-        var parser = new DOMParser();
-        return parser.parseFromString(data, converters.xml.mime);
       }
     }
   }
