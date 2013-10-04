@@ -85,11 +85,43 @@
   }
 
   /**
+   *  Type converters.
+   */
+  var converters = {
+    text: {
+      mime: 'text/plain',
+      encode: function(data){return data;},
+      decode: function(data){return data;}
+    },
+    json: {
+      mime: 'application/json',
+      encode: function(data) {
+        return JSON.stringify(data);
+      },
+      decode: function(data) {
+        return JSON.parse(data);
+      }
+    },
+    xml: {
+      mime: 'text/xml',
+      encode: function(data) {
+        return data;
+      },
+      decode: function(data) {
+        var parser = new DOMParser();
+        return parser.parseFromString(data, "application/xml");
+      }
+    }
+  }
+
+  /**
    *  Converts response text info a response format.
    *
    *  @param text The response text.
+   *  @param type The expected response type identifer.
+   *  @param mime The corresponding mime type.
    */
-  var convert = function(text) {
+  var convert = function(text, type, mime) {
     //console.log("convert text: " + text);
     //console.log("convert text: " + options.type);
     return text;
@@ -206,6 +238,11 @@
    *  Expose IE browser information.
    */
   ajax.ie = ie;
+
+  /**
+   *  Expose type converters.
+   */
+  ajax.converters = converters;
 
   /**
    *  Default options.
