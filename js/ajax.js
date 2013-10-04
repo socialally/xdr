@@ -185,15 +185,21 @@
       xhr: req,
       abort: req.abort,
       core: cors,
-      ie: ie
+      ie: ie,
+      url: url
     }
   }
+
+  /**
+   *  Expose IE browser information.
+   */
+  ajax.ie = ie;
 
   /**
    *  Default options.
    */
   ajax.defaults = {
-    method: 'get',
+    method: 'GET',
     timeout: 10000,
     delay: 0,
     async: true,
