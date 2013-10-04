@@ -394,7 +394,9 @@
   if(typeof(module) === "object" && typeof(module.exports) === "object") {
     module.exports = ajax;
   }else if(typeof(define) == 'function' && define.amd) {
-    define("ajax", [], function () { return ajax; });
+    define(function(require) {
+      return ajax;
+    });
   }else if(window) {
     window.ajax = ajax;
   }

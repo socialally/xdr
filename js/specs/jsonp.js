@@ -5,7 +5,7 @@ define(function(require) {
   var oninfo = require('util/oninfo');
   var ajax = require('ajax');
   describe('Jsonp transport', function() {
-    it('a GET to /jsonp/echo should receive json response on same domain',
+    it('a GET to /jsonp/echo should receive jsonp response on same domain',
       function(done) {
         var success = function(response) {
           assert(response);
@@ -22,7 +22,7 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a GET to http://xdomain.socialal.ly/jsonp/echo should receive json response on cross domain',
+    it('a GET to http://xdomain.socialal.ly/jsonp/echo should receive jsonp response on cross domain',
       function(done) {
         var success = function(response) {
           assert(response);
@@ -39,7 +39,7 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('multiple GET to http://xdomain.socialal.ly/jsonp/echo should receive json response on cross domain',
+    it('multiple GET to http://xdomain.socialal.ly/jsonp/echo should receive multiple jsonp responses on cross domain',
       function(done) {
         var received = 0;
         var success = function(response) {
