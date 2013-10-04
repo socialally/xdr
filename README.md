@@ -40,6 +40,10 @@ Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to test
 http://localhost:9080/standalone.html
 ```
 
+## Minify
+
+To create a minified version of the library run `npm run minify`.
+
 ## Browser Compatibility
 
 ### Full Support

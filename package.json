@@ -24,6 +24,7 @@
   "engine": [ "node >= 0.10.11" ],
   "scripts": {
     "start": "node lib/server.js",
-    "test": "mocha-phantomjs http://localhost:9080"
+    "test": "mocha-phantomjs http://localhost:9080",
+    "minify": "r.js -o build.js"
   }
 }
