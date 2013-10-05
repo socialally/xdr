@@ -144,6 +144,34 @@
   }
 
   /**
+   *  Injects custom error information into a response object.
+   *
+   *  When a server responds with a packet if the packet contains
+   *  an *error* object and the object contains a status number
+   *  then that overrides any pre-determined response status.
+   *
+   *  If the error object contains a message field then the response
+   *  Error instance is overwritten to use the server message.
+   *
+   *  @param response The response object about to be returned to the caller.
+   *  @param options The request options.
+   */
+  var error = function(response, options) {
+    var packet = response.data;
+    if(typeof(packet[options.error]) == 'object') {
+      if(typeof(packet[options.error].status) == 'number') {
+        res.status = packet[options.error].status;
+      }
+      var status = "" + res.status;
+      if(!/^2/.test(status)) {
+        if(packet[options.error].message) {
+          res.error = new Error("" + packet[options.error].message);
+        }
+      }
+    }
+  }
+
+  /**
    *  JSONP implementation.
    *
    *  @param url The URL to make the request to.
@@ -167,6 +195,7 @@
       if(typeof(self.options.callback) == 'function') {
         var res = {status: 200, xhr: self, headers: null, error: null};
         res.data = packet;
+        error(res, self.options);
         self.options.callback(res);
       }
     }
@@ -255,6 +284,9 @@
       data = encoder(options.data);
     }
 
+    // setup custom error field
+    options.error = options.error || ajax.defaults.error;
+
     // send the data as a query string parameter
     if(data && (jsp || (typeof(options.parameter) == 'string'))) {
       options.params = options.params || {};
@@ -274,9 +306,7 @@
      */
     var response = function(response) {
       if(typeof(options.callback) == 'function') {
-        if(!response.hasOwnProperty('error')) {
-          response.error = null;
-        }
+        error(response, options);
         options.callback(response);
       }
     }
@@ -292,15 +322,17 @@
       if(!cors) {
         req.open(method, url);
         req.onload = function() {
-          var res = {status: this.status || 200, xhr: this, headers: null};
+          var res = {status: this.status || 200,
+            xhr: this, headers: null, error: null};
           res.data = convert(this.responseText, type);
           response(res);
-        };
+        }
         req.onerror = function() {
-          var res = {status: this.status || 500, xhr: this, headers: null};
+          var res = {status: this.status || 500,
+            xhr: this, headers: null, error: null};
           res.error = new Error("XDomainRequest error");
           response(res);
-        };
+        }
         req.ontimeout = req.onprogress = function(){};
       }else{
         // apply custom fields, eg: withCredentials
@@ -330,7 +362,7 @@
         req.onreadystatechange = function() {
           if(this.readyState == 4) {
             var status = "" + (this.status || 0);
-            var res = {status: this.status, xhr: this};
+            var res = {status: this.status, xhr: this, error: null};
             if(!/^2/.test(status)) {
               res.error = new Error("XMLHttpRequest error " + status);
             }
@@ -385,6 +417,7 @@
     async: true,
     parameter: 'packet',
     jsonp: 'callback',
+    error: 'error',
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }
