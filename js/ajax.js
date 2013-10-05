@@ -143,7 +143,6 @@
     return null;
   }
 
-
   /**
    *  JSONP implementation.
    *
@@ -165,10 +164,10 @@
       + '=' + encodeURIComponent(cb);
     var elem = createElement('script',{src: this.url});
     window[cb] = function (packet) {
-      if(typeof(self.options.success) == 'function') {
-        var res = {status: 200, xhr: self, headers: null};
+      if(typeof(self.options.callback) == 'function') {
+        var res = {status: 200, xhr: self, headers: null, error: null};
         res.data = packet;
-        self.options.success(res);
+        self.options.callback(res);
       }
     }
 
@@ -214,8 +213,7 @@
    *  @param options.delay A delay before invoking send() in milliseconds.
    *  @param options.data Data to send with the request.
    *  @param options.credentials Authentication credentials.
-   *  @param options.success A callback for 2xx responses.
-   *  @param options.error A callback for error responses.
+   *  @param options.callback A callback for responses.
    *  @param options.mime A MIME type passed to overrideMimeType().
    *  @param options.async Whether the request is asynchronous.
    *  @param options.params Query string parameters to append to the URL.
@@ -275,15 +273,11 @@
      *  callback functions.
      */
     var response = function(response) {
-      var status = "" + (response.status || 0);
-      if(/^2/.test(status)) {
-        if(typeof(options.success) == 'function') {
-          options.success(response);
+      if(typeof(options.callback) == 'function') {
+        if(!response.hasOwnProperty('error')) {
+          response.error = null;
         }
-      }else{
-        if(typeof(options.error) == 'function') {
-          options.error(response);
-        }
+        options.callback(response);
       }
     }
 
@@ -304,6 +298,7 @@
         };
         req.onerror = function() {
           var res = {status: this.status || 500, xhr: this, headers: null};
+          res.error = new Error("XDomainRequest error");
           response(res);
         };
         req.ontimeout = req.onprogress = function(){};
@@ -334,7 +329,11 @@
 
         req.onreadystatechange = function() {
           if(this.readyState == 4) {
+            var status = "" + (this.status || 0);
             var res = {status: this.status, xhr: this};
+            if(!/^2/.test(status)) {
+              res.error = new Error("XMLHttpRequest error " + status);
+            }
             res.headers = parse(this.getAllResponseHeaders());
             res.data = convert(this.responseText, type);
             response(res);

@@ -3,6 +3,9 @@ define(function(require) {
     expect(response).to.have.property('status')
       .to.be.a('number').that.equals(200);
 
+    expect(response).to.have.property('error')
+      .to.equal(null);
+
     // response data
     expect(response).to.have.property('data')
       .to.be.an('object');
