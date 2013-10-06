@@ -160,12 +160,12 @@
     var packet = response.data;
     if(typeof(packet[options.error]) == 'object') {
       if(typeof(packet[options.error].status) == 'number') {
-        res.status = packet[options.error].status;
+        response.status = packet[options.error].status;
       }
-      var status = "" + res.status;
+      var status = "" + response.status;
       if(!/^2/.test(status)) {
         if(packet[options.error].message) {
-          res.error = new Error("" + packet[options.error].message);
+          response.error = new Error("" + packet[options.error].message);
         }
       }
     }

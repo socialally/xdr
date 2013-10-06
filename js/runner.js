@@ -19,7 +19,8 @@ require(['require', 'chai', 'mocha'], function(require, chai){
     'js/specs/jsonp.js',
     'js/specs/json-get.js',
     'js/specs/json-post.js',
-    'js/specs/text-get.js'
+    'js/specs/text-get.js',
+    'js/specs/bad-request.js'
   ], function(require) {
     if(window.mochaPhantomJS) {
       mochaPhantomJS.run();
