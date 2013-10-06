@@ -1,4 +1,4 @@
-# ajax()
+# ajax(options [, callback])
 
 The ajax method accepts an options object that controls the request behaviour and returns an object containing the underlying transport used for the request.
 
@@ -16,7 +16,7 @@ The ajax method accepts an options object that controls the request behaviour an
 * `parameter` Send the data as the named query string parameter.
 * `error` The name of a property of the response object that contains error information, default is `error`.
 * `jsonp` The name of the callback query string variable for jsonp requests, default is `callback`.
-* `delay` A delay before invoking send() in milliseconds (`XDomainRequest` only).
+* `delay` A delay before invoking `send()` in milliseconds (`XDomainRequest` only).
 * `credentials` Authentication credentials (`XMLHttpRequest` only).
 * `fields` Properties to apply to the request instance (`XMLHttpRequest` only).
 

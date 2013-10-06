@@ -252,7 +252,7 @@
    *  @param jsonp The name of the callback query string variable for jsonp
    *  requests, default is 'callback'.
    */
-  var ajax = function(options) {
+  var ajax = function(options, callback) {
     var req, z, jsp = false, data;
     // no options or no json capability (IE7 etc.)
     if(!(typeof(options) == 'object') || !('JSON' in window) ) {
@@ -276,6 +276,10 @@
     if(!jsp && ((ie.browser && ie.version < 8)
       || (!('XMLHttpRequest' in window) && !('XDomainRequest' in window)))) {
       return false;
+    }
+
+    if(typeof(callback) == 'function') {
+      options.callback = callback;
     }
 
     // TODO: copy data so as not to affect the source data
