@@ -11,6 +11,8 @@ Run `npm install` to resolve dependencies.
 * Must support text, json, and jsonp.
 * Must be as lightweight as possible, ~4KB minified.
 
+Use this library if you need to support IE8 and want robust error handling by convention. Requires server-side code to respond following the convention for overriding the response status code and error messages.
+
 ## Documentation
 
 See the [api documentation](doc/md/api.md).

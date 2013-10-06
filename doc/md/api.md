@@ -169,3 +169,25 @@ ajax(opts, function(response) {
 ```
 
 The request packet will be sent as the `packet` query string variable, configurable using the `parameter` option.
+
+### Errors
+
+To handle errors you only need to test the `error` property of the response object, for example:
+
+```
+function error(status, err) {
+  console.log(status + ": " + err.message);
+}
+var opts = {
+  url: '/api',
+  type: 'json'
+};
+ajax(opts, function(response) {
+  if(response.error) {
+    return error(response.status, response.error);
+  }
+  // ...
+});
+```
+
+The `error` property of the response object is always an `Error` instance.
