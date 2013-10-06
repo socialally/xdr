@@ -36,6 +36,18 @@ with the following properties:
 
 Note that the return value will also be false if the `options` object is invalid, ie, no options were supplied or an unsupported `type` was specified.
 
+## Response
+
+The `callback` is invoked with a response object that contains the following properties:
+
+* `status` The HTTP response status code.
+* `data` The response data, if the type is `jsonp` or `json` this will be the
+  decoded javascript object.
+* `xhr` A reference to the transport instance use for the request.
+* `headers` An object containing response headers, will be `null` when
+  response headers are not available. 
+* `error` An `Error` instance or `null` if no error occurred.
+
 ## ajax.defaults
 
 ```
