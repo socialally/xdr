@@ -50,7 +50,7 @@ The `callback` is invoked with a response object that contains the following pro
 * `status` The HTTP response status code.
 * `data` The response data, if the type is `jsonp` or `json` this will be the
   decoded javascript object.
-* `xhr` A reference to the transport instance use for the request.
+* `xhr` A reference to the transport instance used for the request.
 * `headers` An object containing response headers, will be `null` when
   response headers are not available. 
 * `error` An `Error` instance or `null` if no error occurred.
@@ -168,5 +168,4 @@ ajax(opts, function(response) {
 });
 ```
 
-The request packet will be sent as the `packet` query string variable,
-configurable using the `parameter` option.
+The request packet will be sent as the `packet` query string variable, configurable using the `parameter` option.
