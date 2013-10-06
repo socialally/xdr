@@ -10,14 +10,14 @@ The ajax method accepts an options object that controls the request behaviour an
 * `timeout` A timeout for the request in milliseconds.
 * `data` Data to send with the request.
 * `type` The expected data type, one of `json`, `jsonp` or `text`.
-* `callback` A callback for responses.
-* `mime` A MIME type passed to overrideMimeType().
-* `async` Whether the request is asynchronous, default is `true`.
 * `params` Query string parameters to append to the URL.
+* `callback` A callback for responses.
+* `async` Whether the request is asynchronous, default is `true`.
 * `parameter` Send the data as the named query string parameter.
 * `error` The name of a property of the response object that contains error information, default is `error`.
 * `jsonp` The name of the callback query string variable for jsonp requests, default is `callback`.
 * `delay` A delay before invoking `send()` in milliseconds (`XDomainRequest` only).
+* `mime` A MIME type passed to overrideMimeType(), (`XMLHttpRequest` only).
 * `credentials` Authentication credentials (`XMLHttpRequest` only).
 * `fields` Properties to apply to the request instance (`XMLHttpRequest` only).
 
