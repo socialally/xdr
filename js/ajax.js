@@ -244,6 +244,7 @@
    *  @param options.credentials Authentication credentials.
    *  @param options.callback A callback for responses.
    *  @param options.mime A MIME type passed to overrideMimeType().
+   *  @param options.type The expected data type, one of `json`, `jsonp` or `text`.
    *  @param options.async Whether the request is asynchronous.
    *  @param options.params Query string parameters to append to the URL.
    *  @param options.fields Properties to apply to the XMLHttpRequest.

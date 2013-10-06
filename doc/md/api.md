@@ -9,6 +9,7 @@ The ajax method accepts an options object that controls the request behaviour an
 * `headers` An object containing HTTP request headers.
 * `timeout` A timeout for the request in milliseconds.
 * `data` Data to send with the request.
+* `type` The expected data type, one of `json`, `jsonp` or `text`.
 * `callback` A callback for responses.
 * `mime` A MIME type passed to overrideMimeType().
 * `async` Whether the request is asynchronous, default is `true`.
