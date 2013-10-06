@@ -48,6 +48,22 @@ The server must at a minimum send the appropriate headers for CORS support, see 
 
 In addition, in order to support the `XDomainRequest` object for IE 8/9 the server must process requests *that do not contain a Content-Type header* and the client must know the type of data the server responds with. 
 
+To support error handling for instances when the http status code is not available the server should reply with a packet that contains `code` and `error` properties.
+
+A successful 2xx response may be returned as:
+
+```
+{code: 202, message: "Request accepted"}
+```
+
+Whereas for an error the server could reply with:
+
+```
+{code: 400, error: {message: "Bad request"}}
+```
+
+The fields used for extracting status codes and error messages are configurable using the `status` and `error` options.
+
 ## Browser Compatibility
 
 ### Full Support
