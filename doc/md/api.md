@@ -6,7 +6,7 @@ The ajax method accepts an options object that controls the request behaviour an
 
 * `url` The URL to connect to.
 * `method` The HTTP method.
-* `headers` An object containing HTTP headers.
+* `headers` An object containing HTTP request headers.
 * `timeout` A timeout for the request in milliseconds.
 * `delay` A delay before invoking send() in milliseconds.
 * `data` Data to send with the request.
