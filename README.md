@@ -67,6 +67,7 @@ Full support is deemed to be browsers that can make cross domain requests and ac
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.
 * `XDomainRequest` cannot set request headers, specifically no `Content-Type` header may be set.
+* The response status code is not exposed by `XDomainRequest`.
 * Requests must use the same protocol (http:// or https://) as the top-level window.
 
 See [XDomainRequest Limitations](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx) for more information.
