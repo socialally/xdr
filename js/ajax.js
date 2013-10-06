@@ -158,10 +158,11 @@
    */
   var error = function(response, options) {
     var packet = response.data;
+    // override response status code
+    if(typeof(packet[options.status]) == 'number') {
+      response.status = packet[options.status];
+    }
     if(typeof(packet[options.error]) == 'object') {
-      if(typeof(packet[options.error].status) == 'number') {
-        response.status = packet[options.error].status;
-      }
       var status = "" + response.status;
       if(!/^2/.test(status)) {
         if(packet[options.error].message) {
@@ -243,6 +244,8 @@
    *  @param options.data Data to send with the request.
    *  @param options.credentials Authentication credentials.
    *  @param options.callback A callback for responses.
+   *  @param options.error The name of a property of the response object that contains error information, default is `error`.
+   *  @param options.status The name of a property of the response object that contains a status code, default is `code`.
    *  @param options.mime A MIME type passed to overrideMimeType().
    *  @param options.type The expected data type, one of `json`, `jsonp` or `text`.
    *  @param options.async Whether the request is asynchronous.
@@ -291,6 +294,7 @@
 
     // setup custom error field
     options.error = options.error || ajax.defaults.error;
+    options.status = options.status || ajax.defaults.status;
 
     // send the data as a query string parameter
     if(data && (jsp || (typeof(options.parameter) == 'string'))) {
@@ -423,6 +427,7 @@
     parameter: 'packet',
     jsonp: 'callback',
     error: 'error',
+    status: 'code',
     headers: {
       'X-Requested-With': 'XMLHttpRequest'
     }

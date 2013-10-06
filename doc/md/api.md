@@ -21,6 +21,7 @@ ajax({url: "/api", type: 'json'}, function(response) {
 * `async` Whether the request is asynchronous, default is `true`.
 * `parameter` Send the data as the named query string parameter.
 * `error` The name of a property of the response object that contains error information, default is `error`.
+*  `status` The name of a property of the response object that contains a status code, default is `code`.
 * `jsonp` The name of the callback query string variable for jsonp requests, default is `callback`.
 * `delay` A delay before invoking `send()` in milliseconds (`XDomainRequest` only).
 * `mime` A MIME type passed to overrideMimeType(), (`XMLHttpRequest` only).
@@ -65,6 +66,7 @@ ajax.defaults = {
   parameter: 'packet',
   jsonp: 'callback',
   error: 'error',
+  status: 'code',
   headers: {
     'X-Requested-With': 'XMLHttpRequest'
   }
