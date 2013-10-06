@@ -102,3 +102,33 @@ ajax.ie = {
   version: 9
 }
 ```
+
+## Examples
+
+### Json GET
+
+```
+var opts = {
+  url: '/api',
+  type: 'json'
+};
+ajax(opts, function(response) {
+  console.log(response.data);
+});
+```
+
+
+### Json POST
+
+```
+var data = {id: 10};
+var opts = {
+  url: '/api',
+  method: 'POST',
+  type: 'json',
+  data: data
+};
+ajax(opts, function(response) {
+  console.log(response.data);
+});
+```
