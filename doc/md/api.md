@@ -36,7 +36,7 @@ with the following properties:
 
 Note that the return value will also be false if the `options` object is invalid, ie, no options were supplied or an unsupported `type` was specified.
 
-## Defaults
+## ajax.defaults
 
 ```
 ajax.defaults = {
@@ -50,5 +50,43 @@ ajax.defaults = {
   headers: {
     'X-Requested-With': 'XMLHttpRequest'
   }
+}
+```
+
+## ajax.jsonp
+
+A reference to the transport used for `jsonp` requests.
+
+## ajax.converters
+
+Exposes the object containing `type` converters. This object may be used to create additional supported types.
+
+```
+ajax.converters = {
+  text: {
+    mime: 'text/plain',
+    encode: function(data){return data;},
+    decode: function(data){return data;}
+  },
+  json: {
+    mime: 'application/json',
+    encode: function(data) {
+      return JSON.stringify(data);
+    },
+    decode: function(data) {
+      return JSON.parse(data);
+    }
+  }
+}
+```
+
+## ajax.ie
+
+Information about Internet Explorer, for example:
+
+```
+ajax.ie = {
+  browser: true,
+  version: 9
 }
 ```
