@@ -33,3 +33,20 @@ with the following properties:
 * `ie` Object that determines whether the current browser is Internet Explorer and which version of Internet Explorer is in use.
 * `url` The final URL including query string parameters.
 * `jsonp` A boolean indicating whether the request was made using `jsonp`.
+
+## Defaults
+
+```
+ajax.defaults = {
+  method: 'GET',
+  timeout: 10000,
+  delay: 0,
+  async: true,
+  parameter: 'packet',
+  jsonp: 'callback',
+  error: 'error',
+  headers: {
+    'X-Requested-With': 'XMLHttpRequest'
+  }
+}
+```
