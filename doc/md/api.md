@@ -2,6 +2,12 @@
 
 The ajax method accepts an options object that controls the request behaviour and returns an object containing the underlying transport used for the request.
 
+```
+ajax({url: "/api", type: 'json'}, function(response) {
+  // ...
+});
+```
+
 ## Options
 
 * `url` The URL to connect to.
