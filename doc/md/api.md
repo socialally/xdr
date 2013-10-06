@@ -140,6 +140,8 @@ ajax(opts, function(response) {
 
 ### JSONP
 
+Requests using the `jsonp` transport ignore the `method` option as `GET` is the only method available. 
+
 ```
 var opts = {
   url: '/api',
@@ -150,8 +152,7 @@ ajax(opts, function(response) {
 });
 ```
 
-Or to send a JSON and URL-encoded request packet for a JSONP request also
-specify from data:
+Or to send a JSON and URL-encoded request packet for a JSONP request also specify some data:
 
 ```
 var data = {id: 10};
