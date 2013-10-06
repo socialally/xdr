@@ -34,6 +34,8 @@ with the following properties:
 * `url` The final URL including query string parameters.
 * `jsonp` A boolean indicating whether the request was made using `jsonp`.
 
+Note that the return value will also be false if the `options` object is invalid, ie, no options were supplied or an unsupported `type` was specified.
+
 ## Defaults
 
 ```
