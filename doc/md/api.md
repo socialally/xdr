@@ -178,10 +178,7 @@ To handle errors you only need to test the `error` property of the response obje
 function error(status, err) {
   console.log(status + ": " + err.message);
 }
-var opts = {
-  url: '/api',
-  type: 'json'
-};
+var opts = { url: '/api', type: 'json'};
 ajax(opts, function(response) {
   if(response.error) {
     return error(response.status, response.error);
