@@ -19,7 +19,7 @@ The ajax method accepts an options object that controls the request behaviour an
 * `parameter` Send the data as the named query string parameter.
 * `error` The name of a property of the response object that contains error
   information, default is `error`.
-* `jsonp` The name of the callback query string variable for jsonp requests, default is 'callback'.
+* `jsonp` The name of the callback query string variable for jsonp requests, default is `callback`.
 
 ## Return
 

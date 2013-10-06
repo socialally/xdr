@@ -11,6 +11,10 @@ Run `npm install` to resolve dependencies.
 * Must support text, json, and jsonp.
 * Must be as lightweight as possible, ~4KB minified.
 
+## Documentation
+
+See the [api documentation](doc/md/api.md).
+
 ## Test
 
 Map the domain `xdomain.socialal.ly` in `/etc/hosts`:
