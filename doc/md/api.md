@@ -105,7 +105,7 @@ ajax.ie = {
 
 ## Examples
 
-### Json GET
+### JSON GET
 
 ```
 var opts = {
@@ -113,12 +113,11 @@ var opts = {
   type: 'json'
 };
 ajax(opts, function(response) {
-  console.log(response.data);
+  console.log(response);
 });
 ```
 
-
-### Json POST
+### JSON POST
 
 ```
 var data = {id: 10};
@@ -129,6 +128,36 @@ var opts = {
   data: data
 };
 ajax(opts, function(response) {
-  console.log(response.data);
+  console.log(response);
 });
 ```
+
+### JSONP
+
+```
+var opts = {
+  url: '/api',
+  type: 'jsonp'
+};
+ajax(opts, function(response) {
+  console.log(response);
+});
+```
+
+Or to send a JSON and URL-encoded request packet for a JSONP request also
+specify from data:
+
+```
+var data = {id: 10};
+var opts = {
+  url: '/api',
+  type: 'jsonp',
+  data: data
+};
+ajax(opts, function(response) {
+  console.log(response);
+});
+```
+
+The request packet will be sent as the `packet` query string variable,
+configurable using the `parameter` option.
