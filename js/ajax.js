@@ -206,7 +206,11 @@
     var done = false;
     var cleanup = function() {
       window[cb] = null;
-      delete window[cb];
+      // NOTE: empty try/catch due to a bug in IE8
+      // SEE: http://stackoverflow.com/questions/1073414/deleting-a-window-property-in-ie
+      try {
+        delete window[cb];
+      }catch(e){}
       if(head && elem.parentNode) {
         head.removeChild(elem);
       }
