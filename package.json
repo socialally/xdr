@@ -6,7 +6,7 @@
   "author": "muji <noop@xpm.io>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/socialally/ajax.git"
+    "url": "git://github.com/socialally/sa-ajax.git"
   },
   "dependencies": {
     "strike": "== 0.1.73",
