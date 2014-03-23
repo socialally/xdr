@@ -1,6 +1,8 @@
 {
   "name": "sa-ajax",
-  "private": true,
+  "publishConfig": {
+    "registry": "https://registry.socialal.ly"
+  },
   "description": "Cross-browser ajax implementation",
   "version": "0.0.1",
   "author": "muji <noop@xpm.io>",
