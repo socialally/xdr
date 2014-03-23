@@ -1,0 +1,386 @@
+{
+  "name": "sa-ajax",
+  "version": "0.0.1",
+  "dependencies": {
+    "bunyan": {
+      "version": "0.21.4",
+      "from": "bunyan@~0.21.1",
+      "dependencies": {
+        "mv": {
+          "version": "0.0.5",
+          "from": "mv@0.0.5",
+          "resolved": "https://npm.socialal.ly/mv/-/mv-0.0.5.tgz"
+        },
+        "dtrace-provider": {
+          "version": "0.2.8",
+          "from": "dtrace-provider@0.2.8",
+          "resolved": "https://npm.socialal.ly/dtrace-provider/-/dtrace-provider-0.2.8.tgz"
+        }
+      }
+    },
+    "express": {
+      "version": "3.2.6",
+      "from": "express@~3.2.6",
+      "dependencies": {
+        "connect": {
+          "version": "2.7.11",
+          "from": "connect@2.7.11",
+          "resolved": "https://npm.socialal.ly/connect/-/connect-2.7.11.tgz",
+          "dependencies": {
+            "qs": {
+              "version": "0.6.5",
+              "from": "qs@0.6.5",
+              "resolved": "https://npm.socialal.ly/qs/-/qs-0.6.5.tgz"
+            },
+            "formidable": {
+              "version": "1.0.14",
+              "from": "formidable@1.0.14",
+              "resolved": "https://npm.socialal.ly/formidable/-/formidable-1.0.14.tgz"
+            },
+            "cookie": {
+              "version": "0.0.5",
+              "from": "cookie@0.0.5",
+              "resolved": "https://npm.socialal.ly/cookie/-/cookie-0.0.5.tgz"
+            },
+            "send": {
+              "version": "0.1.1",
+              "from": "send@0.1.1",
+              "resolved": "https://npm.socialal.ly/send/-/send-0.1.1.tgz",
+              "dependencies": {
+                "mime": {
+                  "version": "1.2.11",
+                  "from": "mime@~1.2.9"
+                }
+              }
+            },
+            "bytes": {
+              "version": "0.2.0",
+              "from": "bytes@0.2.0",
+              "resolved": "https://npm.socialal.ly/bytes/-/bytes-0.2.0.tgz"
+            },
+            "pause": {
+              "version": "0.0.1",
+              "from": "pause@0.0.1",
+              "resolved": "https://npm.socialal.ly/pause/-/pause-0.0.1.tgz"
+            }
+          }
+        },
+        "commander": {
+          "version": "0.6.1",
+          "from": "commander@0.6.1",
+          "resolved": "https://npm.socialal.ly/commander/-/commander-0.6.1.tgz"
+        },
+        "range-parser": {
+          "version": "0.0.4",
+          "from": "range-parser@0.0.4",
+          "resolved": "https://npm.socialal.ly/range-parser/-/range-parser-0.0.4.tgz"
+        },
+        "mkdirp": {
+          "version": "0.3.4",
+          "from": "mkdirp@0.3.4",
+          "resolved": "https://npm.socialal.ly/mkdirp/-/mkdirp-0.3.4.tgz"
+        },
+        "cookie": {
+          "version": "0.1.0",
+          "from": "cookie@0.1.0",
+          "resolved": "https://npm.socialal.ly/cookie/-/cookie-0.1.0.tgz"
+        },
+        "buffer-crc32": {
+          "version": "0.2.1",
+          "from": "buffer-crc32@0.2.1",
+          "resolved": "https://npm.socialal.ly/buffer-crc32/-/buffer-crc32-0.2.1.tgz"
+        },
+        "fresh": {
+          "version": "0.1.0",
+          "from": "fresh@0.1.0",
+          "resolved": "https://npm.socialal.ly/fresh/-/fresh-0.1.0.tgz"
+        },
+        "methods": {
+          "version": "0.0.1",
+          "from": "methods@0.0.1",
+          "resolved": "https://npm.socialal.ly/methods/-/methods-0.0.1.tgz"
+        },
+        "send": {
+          "version": "0.1.0",
+          "from": "send@0.1.0",
+          "resolved": "https://npm.socialal.ly/send/-/send-0.1.0.tgz",
+          "dependencies": {
+            "mime": {
+              "version": "1.2.6",
+              "from": "mime@1.2.6",
+              "resolved": "https://npm.socialal.ly/mime/-/mime-1.2.6.tgz"
+            }
+          }
+        },
+        "cookie-signature": {
+          "version": "1.0.1",
+          "from": "cookie-signature@1.0.1",
+          "resolved": "https://npm.socialal.ly/cookie-signature/-/cookie-signature-1.0.1.tgz"
+        },
+        "debug": {
+          "version": "0.7.4",
+          "from": "debug@*"
+        }
+      }
+    },
+    "nconf": {
+      "version": "0.6.9",
+      "from": "nconf@~0.6.7",
+      "dependencies": {
+        "async": {
+          "version": "0.2.9",
+          "from": "async@0.2.9",
+          "resolved": "https://npm.socialal.ly/async/-/async-0.2.9.tgz"
+        },
+        "ini": {
+          "version": "1.1.0",
+          "from": "ini@1.x.x"
+        },
+        "optimist": {
+          "version": "0.6.0",
+          "from": "optimist@0.6.0",
+          "resolved": "https://npm.socialal.ly/optimist/-/optimist-0.6.0.tgz",
+          "dependencies": {
+            "wordwrap": {
+              "version": "0.0.2",
+              "from": "wordwrap@~0.0.2"
+            },
+            "minimist": {
+              "version": "0.0.8",
+              "from": "minimist@~0.0.1"
+            }
+          }
+        }
+      }
+    },
+    "requirejs": {
+      "version": "2.1.11",
+      "from": "requirejs@~2.1.3"
+    },
+    "sassy": {
+      "version": "0.0.29",
+      "from": "sassy@~0.0.29",
+      "dependencies": {
+        "bake-tasks": {
+          "version": "0.0.7",
+          "from": "bake-tasks@>= 0.0.5"
+        },
+        "async": {
+          "version": "0.2.10",
+          "from": "async@>= 0.2.8"
+        },
+        "jade": {
+          "version": "1.3.0",
+          "from": "jade@>= 0.31.1",
+          "dependencies": {
+            "commander": {
+              "version": "2.1.0",
+              "from": "commander@2.1.0",
+              "resolved": "https://npm.socialal.ly/commander/-/commander-2.1.0.tgz"
+            },
+            "mkdirp": {
+              "version": "0.3.5",
+              "from": "mkdirp@~0.3.5",
+              "resolved": "https://npm.socialal.ly/mkdirp/-/mkdirp-0.3.5.tgz"
+            },
+            "transformers": {
+              "version": "2.1.0",
+              "from": "transformers@2.1.0",
+              "resolved": "https://npm.socialal.ly/transformers/-/transformers-2.1.0.tgz",
+              "dependencies": {
+                "promise": {
+                  "version": "2.0.0",
+                  "from": "promise@~2.0",
+                  "dependencies": {
+                    "is-promise": {
+                      "version": "1.0.0",
+                      "from": "is-promise@~1"
+                    }
+                  }
+                },
+                "css": {
+                  "version": "1.0.8",
+                  "from": "css@~1.0.8",
+                  "dependencies": {
+                    "css-parse": {
+                      "version": "1.0.4",
+                      "from": "css-parse@1.0.4",
+                      "resolved": "https://npm.socialal.ly/css-parse/-/css-parse-1.0.4.tgz"
+                    },
+                    "css-stringify": {
+                      "version": "1.0.5",
+                      "from": "css-stringify@1.0.5",
+                      "resolved": "https://npm.socialal.ly/css-stringify/-/css-stringify-1.0.5.tgz"
+                    }
+                  }
+                },
+                "uglify-js": {
+                  "version": "2.2.5",
+                  "from": "uglify-js@~2.2.5",
+                  "dependencies": {
+                    "source-map": {
+                      "version": "0.1.33",
+                      "from": "source-map@~0.1.7",
+                      "dependencies": {
+                        "amdefine": {
+                          "version": "0.1.0",
+                          "from": "amdefine@>=0.0.4"
+                        }
+                      }
+                    },
+                    "optimist": {
+                      "version": "0.3.7",
+                      "from": "optimist@~0.3.5",
+                      "dependencies": {
+                        "wordwrap": {
+                          "version": "0.0.2",
+                          "from": "wordwrap@~0.0.2"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "character-parser": {
+              "version": "1.2.0",
+              "from": "character-parser@1.2.0",
+              "resolved": "https://npm.socialal.ly/character-parser/-/character-parser-1.2.0.tgz"
+            },
+            "monocle": {
+              "version": "1.1.51",
+              "from": "monocle@1.1.51",
+              "resolved": "https://npm.socialal.ly/monocle/-/monocle-1.1.51.tgz",
+              "dependencies": {
+                "readdirp": {
+                  "version": "0.2.5",
+                  "from": "readdirp@~0.2.3",
+                  "dependencies": {
+                    "minimatch": {
+                      "version": "0.2.14",
+                      "from": "minimatch@>=0.2.4",
+                      "dependencies": {
+                        "lru-cache": {
+                          "version": "2.5.0",
+                          "from": "lru-cache@2"
+                        },
+                        "sigmund": {
+                          "version": "1.0.0",
+                          "from": "sigmund@~1.0.0"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "with": {
+              "version": "3.0.0",
+              "from": "with@~3.0.0",
+              "dependencies": {
+                "uglify-js": {
+                  "version": "2.4.13",
+                  "from": "uglify-js@~2.4.12",
+                  "dependencies": {
+                    "source-map": {
+                      "version": "0.1.33",
+                      "from": "source-map@~0.1.33",
+                      "dependencies": {
+                        "amdefine": {
+                          "version": "0.1.0",
+                          "from": "amdefine@>=0.0.4"
+                        }
+                      }
+                    },
+                    "optimist": {
+                      "version": "0.3.7",
+                      "from": "optimist@~0.3.5",
+                      "dependencies": {
+                        "wordwrap": {
+                          "version": "0.0.2",
+                          "from": "wordwrap@~0.0.2"
+                        }
+                      }
+                    },
+                    "uglify-to-browserify": {
+                      "version": "1.0.2",
+                      "from": "uglify-to-browserify@~1.0.0"
+                    }
+                  }
+                }
+              }
+            },
+            "constantinople": {
+              "version": "2.0.0",
+              "from": "constantinople@~2.0.0",
+              "dependencies": {
+                "uglify-js": {
+                  "version": "2.4.13",
+                  "from": "uglify-js@~2.4.0",
+                  "dependencies": {
+                    "source-map": {
+                      "version": "0.1.33",
+                      "from": "source-map@~0.1.33",
+                      "dependencies": {
+                        "amdefine": {
+                          "version": "0.1.0",
+                          "from": "amdefine@>=0.0.4"
+                        }
+                      }
+                    },
+                    "optimist": {
+                      "version": "0.3.7",
+                      "from": "optimist@~0.3.5",
+                      "dependencies": {
+                        "wordwrap": {
+                          "version": "0.0.2",
+                          "from": "wordwrap@~0.0.2"
+                        }
+                      }
+                    },
+                    "uglify-to-browserify": {
+                      "version": "1.0.2",
+                      "from": "uglify-to-browserify@~1.0.0"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "marked": {
+          "version": "0.2.10",
+          "from": "marked@~0.2.5"
+        },
+        "markdown": {
+          "version": "0.4.0",
+          "from": "markdown@~0.4.0",
+          "dependencies": {
+            "nopt": {
+              "version": "1.0.10",
+              "from": "nopt@1",
+              "dependencies": {
+                "abbrev": {
+                  "version": "1.0.4",
+                  "from": "abbrev@1"
+                }
+              }
+            }
+          }
+        },
+        "mds": {
+          "version": "0.1.7",
+          "from": "mds@~0.1.7"
+        },
+        "humanize": {
+          "version": "0.0.9",
+          "from": "humanize@~0.0.7"
+        }
+      }
+    },
+    "strike": {
+      "version": "0.1.73",
+      "from": "strike@~0.1.73"
+    }
+  }
+}
