@@ -1,11 +1,12 @@
 {
   "name": "sa-ajax",
-  "publishConfig": {
-    "registry": "https://registry.socialal.ly"
-  },
+  "version": "0.0.2",
   "description": "Cross-browser ajax implementation",
-  "version": "0.0.1",
   "author": "muji <noop@xpm.io>",
+  "publishConfig": {
+    "registry": "https://registry.socialal.ly",
+    "ca": null
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/socialally/sa-ajax.git"
@@ -22,7 +23,9 @@
     "chai": ">= 1.6.0",
     "mocha-phantomjs": ">= 3.1.4"
   },
-  "engine": [ "node >= 0.10.11" ],
+  "engine": [
+    "node >= 0.10.11"
+  ],
   "scripts": {
     "start": "node lib/server.js",
     "test": "mocha-phantomjs http://localhost:9080",
