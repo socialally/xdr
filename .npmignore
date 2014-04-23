@@ -1,7 +1,12 @@
 conf
 css
 doc
-js
+js/ajax-xml.js
+js/require.js
+js/runner.js
+js/lib
+js/specs
+js/util
 /lib/server.js
 target
 /bake
