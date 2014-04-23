@@ -1,11 +1,12 @@
 {
   "name": "sa-ajax",
-  "publishConfig": {
-    "registry": "https://registry.socialal.ly"
-  },
-  "description": "Cross-browser ajax implementation",
   "version": "0.0.1",
+  "description": "Cross-browser ajax implementation",
   "author": "muji <noop@xpm.io>",
+  "publishConfig": {
+    "registry": "https://registry.socialal.ly",
+    "ca": null
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/socialally/sa-ajax.git"
