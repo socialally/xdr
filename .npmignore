@@ -12,7 +12,6 @@ target
 /bake
 /build.js
 /index.html
-/npm-shrinkwrap.json
 /semver.json
 /standalone.html
 /tasks
