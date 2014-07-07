@@ -1,26 +1,21 @@
 require.config({
-  baseUrl: './js',
+  baseUrl: './',
   paths: {
     'mocha'         : 'lib/mocha',
-    'chai'          : 'lib/chai'
+    'chai'          : 'lib/chai',
+    'ajax'          : '../js/ajax'
   }
 });
 
 require(['require', 'chai', 'mocha'], function(require, chai){
-  //window.host = 'http://regulus.socialal.ly';
-  //window.host = 'http://localhost:10000';
-  //window.ns = '/social-ally/demo/poll';
-
   window.expect = chai.expect;
-
   mocha.setup('bdd');
-
   require([
-    'js/specs/jsonp.js',
-    'js/specs/json-get.js',
-    'js/specs/json-post.js',
-    'js/specs/text-get.js',
-    'js/specs/bad-request.js'
+    'specs/jsonp.js',
+    'specs/json-get.js',
+    'specs/json-post.js',
+    'specs/text-get.js',
+    'specs/bad-request.js'
   ], function(require) {
     if(window.mochaPhantomJS) {
       mochaPhantomJS.run();

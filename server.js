@@ -1,4 +1,4 @@
-var pkg = require('../package.json');
+var pkg = require('./package.json');
 var express = require('express');
 var log = require('cli-logger');
 var logger = log.createLogger({name: pkg.name});
@@ -10,7 +10,7 @@ var app = express();
 var packet = {greeting: 'hello', number: 10};
 
 app.configure(function() {
-  app.use(express.static(__dirname + '/../'));
+  app.use(express.static(__dirname));
   app.use(express.json());
 });
 
@@ -29,6 +29,10 @@ app.use(function(req, res, next) {
   res.set('Access-Control-Max-Age', 300);
   next();
 });
+
+app.get('/', function(req, res, next) {
+  res.redirect('/test');
+})
 
 app.get('/static', function(req, res, next) {
   res.json(packet);

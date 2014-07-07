@@ -21,7 +21,6 @@
     "node >= 0.10.11"
   ],
   "scripts": {
-    "start": "node server.js",
     "test": "mocha-phantomjs http://localhost:9080/test/",
     "minify": "r.js -o build.js"
   }
