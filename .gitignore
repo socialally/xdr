@@ -2,4 +2,5 @@
 target
 node_modules
 *.log
+*.bak
 semver.json
