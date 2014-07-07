@@ -1,3 +1,0 @@
-require tasks/doc;
-require tasks/semver;
-require tasks/semver-git;
