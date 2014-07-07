@@ -9,7 +9,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "strike": "== 0.1.73",
     "sassy": "~0.0.29",
     "requirejs": "~2.1.3",
     "bunyan": "~0.21.1",
