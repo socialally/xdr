@@ -3,6 +3,7 @@
   "version": "0.0.8",
   "description": "Cross-browser ajax implementation",
   "author": "muji <noop@xpm.io>",
+  "main": "js/ajax.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/socialally/sa-ajax.git"
