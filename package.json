@@ -1,6 +1,6 @@
 {
   "name": "sa-ajax",
-  "version": "0.0.8",
+  "version": "0.0.81",
   "description": "Cross-browser ajax implementation",
   "author": "muji <noop@xpm.io>",
   "main": "js/ajax.js",
