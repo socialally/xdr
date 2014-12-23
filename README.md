@@ -1,6 +1,6 @@
 # Ajax Implementation
 
-An AMD compatible cross-browser, cross-domain Ajax implementation. 
+An AMD compatible cross-browser, cross-domain Ajax implementation.
 
 Run `npm install` to resolve dependencies.
 
@@ -84,7 +84,7 @@ Full support is deemed to be browsers that can make cross domain requests and ac
 
 ### XDomainRequest (IE 8/9)
 
-* Only `GET` and `POST` methods are allowed. 
+* Only `GET` and `POST` methods are allowed.
 * Response headers are not available to browsers using the `XDomainRequest` object.
 * The `async` option is ignored for `XDomainRequest` instances.
 * Authentication credentials may not be used with `XDomainRequest`.
@@ -119,3 +119,7 @@ When a browser does not support exposing response headers only the following sim
 * [XDomainRequest](http://msdn.microsoft.com/en-us/library/ie/cc288060%28v=vs.85%29.aspx)
 * [XDomainRequest Limitations](http://blogs.msdn.com/b/ieinternals/archive/2010/05/13/xdomainrequest-restrictions-limitations-and-workarounds.aspx)
 * [XDomainRequest Quirks](http://cypressnorth.com/programming/internet-explorer-aborting-ajax-requests-fixed/)
+
+## License
+
+MIT

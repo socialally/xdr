@@ -24,5 +24,6 @@
   "scripts": {
     "test": "mocha-phantomjs http://localhost:9080/test/",
     "minify": "r.js -o build.js"
-  }
+  },
+  "license": "MIT"
 }
