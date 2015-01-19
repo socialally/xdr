@@ -313,6 +313,10 @@
        : ajax.defaults.async;
     options.credentials = options.credentials || {};
 
+    if (!headers['Content-Type']) {
+      headers['Content-Type'] = converters[type].mime;
+    }
+
     /**
      *  Generic response handler for invoking the
      *  callback functions.
