@@ -1,7 +1,7 @@
 {
-  "name": "sa-ajax",
+  "name": "xdr",
   "version": "0.2.0",
-  "description": "Cross-browser ajax implementation",
+  "description": "Cross-browser and cross-domain ajax implementation",
   "author": "muji <noop@xpm.io>",
   "main": "js/ajax.js",
   "repository": {
