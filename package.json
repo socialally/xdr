@@ -6,7 +6,7 @@
   "main": "js/ajax.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/socialally/sa-ajax.git"
+    "url": "git://github.com/socialally/xdr.git"
   },
   "dependencies": {},
   "devDependencies": {
