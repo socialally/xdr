@@ -16,14 +16,11 @@
     "mocha-phantomjs": "~3.6.0",
     "nconf": "~0.6.7",
     "phantomjs": "~1.9.15",
-    "requirejs": "~2.1.3"
+    "requirejs": "~2.1.20"
   },
   "scripts": {
     "test": "mocha-phantomjs http://localhost:9080/test/",
     "minify": "r.js -o build.js"
   },
-  "license": "MIT",
-  "dependencies": {
-    "requirejs": "~2.1.20"
-  }
+  "license": "MIT"
 }

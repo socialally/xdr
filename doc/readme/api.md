@@ -1,4 +1,8 @@
-# ajax(options [, callback])
+## API
+
+```
+ajax(options [, callback])
+```
 
 The ajax method accepts an options object that controls the request behaviour and returns an object containing the underlying transport used for the request.
 
@@ -8,7 +12,7 @@ ajax({url: "/api", type: 'json'}, function(response) {
 });
 ```
 
-## Options
+### Options
 
 * `url` The URL to connect to.
 * `method` The HTTP method.
@@ -28,7 +32,7 @@ ajax({url: "/api", type: 'json'}, function(response) {
 * `credentials` Authentication credentials (`XMLHttpRequest` only).
 * `fields` Properties to apply to the request instance (`XMLHttpRequest` only).
 
-## Return
+### Return
 
 Invoking `ajax()` returns `false` when the current browser does not support
 `JSON`, `XMLHttpRequest` or `XDomainRequest`, otherwise an object is returned
@@ -43,7 +47,7 @@ with the following properties:
 
 Note that the return value will also be false if the `options` object is invalid, ie, no options were supplied or an unsupported `type` was specified.
 
-## Response
+### Response
 
 The `callback` is invoked with a response object that contains the following properties:
 
@@ -55,7 +59,7 @@ The `callback` is invoked with a response object that contains the following pro
   response headers are not available. 
 * `error` An `Error` instance or `null` if no error occurred.
 
-## ajax.defaults
+### ajax.defaults
 
 ```
 ajax.defaults = {
@@ -73,11 +77,11 @@ ajax.defaults = {
 }
 ```
 
-## ajax.jsonp
+### ajax.jsonp
 
 A reference to the transport used for `jsonp` requests.
 
-## ajax.converters
+### ajax.converters
 
 Exposes the object containing `type` converters. This object may be used to create additional supported types.
 
@@ -100,7 +104,7 @@ ajax.converters = {
 }
 ```
 
-## ajax.ie
+### ajax.ie
 
 Information about Internet Explorer, for example:
 
@@ -111,9 +115,9 @@ ajax.ie = {
 }
 ```
 
-## Examples
+### Examples
 
-### JSON GET
+#### JSON GET
 
 ```
 var opts = {
@@ -125,7 +129,7 @@ ajax(opts, function(response) {
 });
 ```
 
-### JSON POST
+#### JSON POST
 
 ```
 var data = {id: 10};
@@ -140,7 +144,7 @@ ajax(opts, function(response) {
 });
 ```
 
-### JSONP
+#### JSONP
 
 Requests using the `jsonp` transport ignore the `method` option as `GET` is the only method available. 
 
@@ -170,7 +174,7 @@ ajax(opts, function(response) {
 
 The request packet will be sent as the `packet` query string variable, configurable using the `parameter` option.
 
-### Errors
+#### Errors
 
 To handle errors you only need to test the `error` property of the response object, for example:
 
@@ -189,7 +193,7 @@ ajax(opts, function(response) {
 
 The `error` property of the response object is always an `Error` instance.
 
-### Abort
+#### Abort
 
 You may abort a request by calling the `abort` function of the return object. In the case of the `jsonp` type, this function is a non-operation.
 
