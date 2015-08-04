@@ -9,12 +9,13 @@
     "url": "git://github.com/socialally/xdr.git"
   },
   "devDependencies": {
-    "chai": "~1.6.0",
-    "cli-logger": "^0.5.12",
+    "chai": "~3.2.0",
+    "cli-logger": "~0.5.40",
     "express": "~3.2.6",
-    "mocha": "~1.9.0",
-    "mocha-phantomjs": "~3.1.4",
+    "mocha": "~2.2.5",
+    "mocha-phantomjs": "~3.6.0",
     "nconf": "~0.6.7",
+    "phantomjs": "~1.9.15",
     "requirejs": "~2.1.3"
   },
   "scripts": {
