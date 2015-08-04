@@ -19,8 +19,32 @@
     "requirejs": "~2.1.20"
   },
   "scripts": {
+    "clean": "rm -f ajax.min.js",
+    "docs": "npm run readme",
+    "readme": "mdp --force -v",
     "test": "mocha-phantomjs http://localhost:9080/test/",
     "minify": "r.js -o build.js"
+  },
+  "mdp": {
+    "title": "Cross Domain Ajax",
+    "pedantic": true,
+    "include": "doc/readme",
+    "require": "lib",
+    "links": "links.md",
+    "toc": "Table of Contents",
+    "base": "https://github.com/socialally/xdr",
+    "partial": [
+      {
+        "inc": [
+          "introduction.md",
+          "install.md",
+          "design.md",
+          "api.md",
+          "developer.md",
+          "appendix.md"
+        ]
+      }
+    ]
   },
   "license": "MIT"
 }

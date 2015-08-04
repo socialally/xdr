@@ -1,5 +1,13 @@
 ## Developer
 
+### Minify
+
+To create the minified build file:
+
+```
+npm run minify
+```
+
 ### Clean
 
 To remove generated files:
@@ -14,14 +22,6 @@ To run test fixtures:
 
 ```
 npm test
-```
-
-### Cover
-
-To generate code coverage:
-
-```
-npm run cover
 ```
 
 ### Documentation
