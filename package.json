@@ -8,7 +8,6 @@
     "type": "git",
     "url": "git://github.com/socialally/xdr.git"
   },
-  "dependencies": {},
   "devDependencies": {
     "chai": "~1.6.0",
     "cli-logger": "^0.5.12",
@@ -18,12 +17,12 @@
     "nconf": "~0.6.7",
     "requirejs": "~2.1.3"
   },
-  "engine": [
-    "node >= 0.10.11"
-  ],
   "scripts": {
     "test": "mocha-phantomjs http://localhost:9080/test/",
     "minify": "r.js -o build.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "requirejs": "~2.1.20"
+  }
 }
