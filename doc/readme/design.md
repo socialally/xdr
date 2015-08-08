@@ -7,27 +7,6 @@
 
 Use this library if you need to support IE8 (cross-domain) and want robust error handling by convention. Requires server-side code to respond following the convention for overriding the response status code and error messages see the [server implementation](#server-implementation) notes.
 
-## Test
-
-Map the domain `xdomain.socialal.ly` in `/etc/hosts`:
-
-```
-127.0.0.1     xdomain.socialal.ly
-```
-
-And configure a reverse proxy, an example for [nginx](http://nginx.org) is available as [xdomain.socialal.ly.conf](conf/xdomain.socialal.ly.conf).
-
-Then run the tests in a browser:
-
-1. `npm start` - Start the mock server.
-2. Visit `http://localhost:9080`
-
-Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to test you need to visit:
-
-```
-http://localhost:9080/standalone.html
-```
-
 ## Server Implementation
 
 The server must at a minimum send the appropriate headers for CORS support, see [server.js](lib/server.js) for example headers.

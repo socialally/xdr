@@ -4,7 +4,6 @@ Table of Contents
 * [Cross Domain Ajax](#cross-domain-ajax)
   * [Install](#install)
   * [Design Goals](#design-goals)
-  * [Test](#test)
   * [Server Implementation](#server-implementation)
   * [Browser Compatibility](#browser-compatibility)
     * [Full Support](#full-support)
@@ -26,10 +25,13 @@ Table of Contents
       * [Errors](#errors)
       * [Abort](#abort)
   * [Developer](#developer)
-    * [Minify](#minify)
+    * [Test](#test)
+    * [Start](#start)
+    * [Cover](#cover)
+    * [Lint](#lint)
     * [Clean](#clean)
-    * [Test](#test-1)
-    * [Documentation](#documentation)
+    * [Spec](#spec)
+    * [Instrument](#instrument)
     * [Readme](#readme)
   * [Appendix](#appendix)
     * [Simple Headers](#simple-headers)
@@ -38,7 +40,7 @@ Table of Contents
 Cross Domain Ajax
 =================
 
-An AMD compatible cross-browser, cross-domain Ajax implementation.
+A UMD cross-domain Ajax implementation.
 
 ## Install
 
@@ -54,27 +56,6 @@ npm i xdr
 * Must be as lightweight as possible, ~4KB minified.
 
 Use this library if you need to support IE8 (cross-domain) and want robust error handling by convention. Requires server-side code to respond following the convention for overriding the response status code and error messages see the [server implementation](#server-implementation) notes.
-
-## Test
-
-Map the domain `xdomain.socialal.ly` in `/etc/hosts`:
-
-```
-127.0.0.1     xdomain.socialal.ly
-```
-
-And configure a reverse proxy, an example for [nginx](http://nginx.org) is available as [xdomain.socialal.ly.conf](https://github.com/socialally/xdrconf/xdomain.socialal.ly.conf).
-
-Then run the tests in a browser:
-
-1. `npm start` - Start the mock server.
-2. Visit `http://localhost:9080`.
-
-Note that IE8 is not supported by [chai](http://chaijs.com/) so in order to test you need to visit:
-
-```
-http://localhost:9080/standalone.html
-```
 
 ## Server Implementation
 
@@ -341,41 +322,69 @@ req.abort();
 
 ## Developer
 
-### Minify
-
-To create the minified build file:
-
-```
-npm run minify
-```
-
-### Clean
-
-To remove generated files:
-
-```
-npm run clean
-```
+Developer workflow is via [gulp][] but should be executed as `npm` scripts to enable shell execution where necessary.
 
 ### Test
 
-To run test fixtures:
+Run the headless test suite using [phantomjs][]:
 
 ```
 npm test
 ```
 
-### Documentation
+To run the tests in a browser context open [test/index.html](https://github.com/socialally/xdr/blob/master/test/index.html) or use the server `npm start`.
 
-To generate all documentation:
+### Start
+
+Serve the test files from a web server with:
 
 ```
-npm run docs
+npm start
+```
+
+### Cover
+
+Run the test suite and generate code coverage:
+
+```
+npm run cover
+```
+
+### Lint
+
+Run the source tree through [eslint][]:
+
+```
+npm run lint
+```
+
+### Clean
+
+Remove generated files:
+
+```
+npm run clean
+```
+
+### Spec
+
+Compile the test specifications:
+
+```
+npm run spec
+```
+
+### Instrument
+
+Generate instrumented code from `lib` in `instrument`:
+
+```
+npm run instrument
 ```
 
 ### Readme
 
-To build the readme file from the partial definitions (requires [mdp](https://github.com/freeformsystems/mdp)):
+Generate the project readme file (requires [mdp](https://github.com/freeformsystems/mdp)):
 
 ```
 npm run readme

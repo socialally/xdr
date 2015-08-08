@@ -1,1 +1,1 @@
-An AMD compatible cross-browser, cross-domain Ajax implementation.
+A UMD cross-domain Ajax implementation.
