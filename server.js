@@ -1,13 +1,8 @@
-var pkg = require('./package.json');
-var express = require('express');
-var log = require('cli-logger');
-var logger = log.createLogger({name: pkg.name});
-var nconf = require('nconf');
-nconf.argv();
-var port = nconf.get('port') || 9080;
-var app = express();
-
-var packet = {greeting: 'hello', number: 10};
+var pkg = require('./package.json')
+  , express = require('express')
+  , port = 9080
+  , app = express()
+  , packet = {greeting: 'hello', number: 10};
 
 app.configure(function() {
   app.use(express.static(__dirname));
@@ -103,6 +98,8 @@ app.get('*', function(req, res) {
   res.end();
 });
 
-app.listen(port, function() {
-  logger.info("listen %s", port);
-});
+if(!module.parent) {
+  app.listen(port, function() {
+    //console.info("listen %s", port);
+  });
+}

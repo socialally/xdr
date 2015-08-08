@@ -3,4 +3,5 @@ target
 node_modules
 *.log
 *.bak
-semver.json
+/test/spec.js
+/test/*.js.map
