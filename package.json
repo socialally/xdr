@@ -1,6 +1,6 @@
 {
   "name": "xdr",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Cross-browser and cross-domain ajax implementation",
   "author": "muji <noop@xpm.io>",
   "main": "lib/ajax.js",
