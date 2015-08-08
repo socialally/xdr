@@ -12,7 +12,8 @@
     <script>
       mocha.setup({
         ui: 'bdd',
-        globals: ['___browserSync___*', 'io*'],
+        reporter: 'list',
+        globals: ['___browserSync___*', 'io*', '__jsonp*'],
         asyncOnly: true
       });
     </script>

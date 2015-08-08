@@ -3,10 +3,5 @@ var gulp = require('gulp')
 
 gulp.task('test', ['spec'], function() {
   return gulp.src('test/index.html')
-    .pipe(phantomjs({
-      reporter: 'list', 
-      mocha: {
-        globals: ['*jsonp*']
-      }
-    }));
+    .pipe(phantomjs());
 });
