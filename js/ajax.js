@@ -207,7 +207,8 @@
     var cleanup = function() {
       window[cb] = null;
       // NOTE: empty try/catch due to a bug in IE8
-      // SEE: http://stackoverflow.com/questions/1073414/deleting-a-window-property-in-ie
+      // SEE: http://stackoverflow.com/questions/1073414/ \
+      // SEE:   deleting-a-window-property-in-ie
       try {
         delete window[cb];
       }catch(e){}
@@ -248,10 +249,13 @@
    *  @param options.data Data to send with the request.
    *  @param options.credentials Authentication credentials.
    *  @param options.callback A callback for responses.
-   *  @param options.error The name of a property of the response object that contains error information, default is `error`.
-   *  @param options.status The name of a property of the response object that contains a status code, default is `code`.
+   *  @param options.error The name of a property of the response object that 
+   *  contains error information, default is `error`.
+   *  @param options.status The name of a property of the response object that 
+   *  contains a status code, default is `code`.
    *  @param options.mime A MIME type passed to overrideMimeType().
-   *  @param options.type The expected data type, one of `json`, `jsonp` or `text`.
+   *  @param options.type The expected data type, one of `json`, `jsonp` 
+   *  or `text`.
    *  @param options.async Whether the request is asynchronous.
    *  @param options.params Query string parameters to append to the URL.
    *  @param options.fields Properties to apply to the XMLHttpRequest.
