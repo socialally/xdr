@@ -1,4 +1,4 @@
-var ajax = require('../../lib/ajax')
+var ajax = require('ajax')
   , expect = require('chai').expect;
 
 function assert(response) {

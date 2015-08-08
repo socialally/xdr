@@ -39,7 +39,11 @@
     "clean": "gulp clean",
     "spec": "gulp spec",
     "instrument": "istanbul instrument --output instrument lib/",
+    "precover": "npm run pretest",
+    "postcover": "npm run posttest",
     "cover": "npm run instrument && gulp cover",
+    "pretest": "node ./server.js &",
+    "posttest": "kill `cat server.pid` && rm server.pid",
     "test": "gulp test"
   },
   "mdp": {

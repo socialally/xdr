@@ -1,6 +1,6 @@
 var assert = require('../util/assert')
   , oninfo = require('../util/oninfo')
-  , ajax = require('../../lib/ajax');
+  , ajax = require('ajax');
 
 describe('xdr:', function() {
 

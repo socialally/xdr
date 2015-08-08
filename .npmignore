@@ -1,7 +1,6 @@
 coverage
-target
+instrument
 package
-build
 conf
 doc
 test

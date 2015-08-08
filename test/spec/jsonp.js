@@ -1,6 +1,6 @@
 var assert = require('../util/assert')
   , oninfo = require('../util/oninfo')
-  , ajax = require('../../lib/ajax')
+  , ajax = require('ajax')
   , packet = {greeting: 'hello', number: 10};
 
 describe('xdr (jsonp):', function() {

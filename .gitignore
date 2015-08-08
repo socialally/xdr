@@ -1,7 +1,10 @@
 .DS_Store
 target
 node_modules
+coverage
+instrument
 *.log
 *.bak
+*.pid
 /test/spec.js
 /test/*.js.map

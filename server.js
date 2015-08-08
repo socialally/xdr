@@ -1,4 +1,5 @@
 var pkg = require('./package.json')
+  , fs = require('fs')
   , express = require('express')
   , port = 9080
   , app = express()
@@ -100,6 +101,6 @@ app.get('*', function(req, res) {
 
 if(!module.parent) {
   app.listen(port, function() {
-    //console.info("listen %s", port);
+    fs.writeFileSync('server.pid', '' + process.pid);
   });
 }
