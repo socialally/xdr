@@ -20,14 +20,14 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a GET to http://xdomain.socialal.ly/jsonp/echo should receive jsonp response on cross domain',
+    it('a GET to http://127.0.0.1:9080/jsonp/echo should receive jsonp response on cross domain',
       function(done) {
         var callback = function(response) {
           assert(response);
           done();
         }
         var opts = {
-          url: 'http://xdomain.socialal.ly/jsonp/echo',
+          url: 'http://127.0.0.1:9080/jsonp/echo',
           type: 'jsonp',
           callback: callback,
           data: packet
@@ -36,7 +36,7 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('multiple GET to http://xdomain.socialal.ly/jsonp/echo should receive multiple jsonp responses on cross domain',
+    it('multiple GET to http://127.0.0.1:9080/jsonp/echo should receive multiple jsonp responses on cross domain',
       function(done) {
         var received = 0;
         var callback = function(response) {
@@ -47,7 +47,7 @@ define(function(require) {
           }
         }
         var opts = {
-          url: 'http://xdomain.socialal.ly/jsonp/echo',
+          url: 'http://127.0.0.1:9080/jsonp/echo',
           type: 'jsonp',
           callback: callback,
           data: packet

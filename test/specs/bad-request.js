@@ -22,10 +22,10 @@ define(function(require) {
         });
       }
     );
-    it('a GET to http://xdomain.socialal.ly/error/400 should receive error response on cross domain',
+    it('a GET to http://127.0.0.1:9080/error/400 should receive error response on cross domain',
       function(done) {
         var opts = {
-          url: 'http://xdomain.socialal.ly/error/400',
+          url: 'http://127.0.0.1:9080/error/400',
           type: 'json'
         };
         ajax(opts, function(response) {

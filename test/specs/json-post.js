@@ -24,14 +24,14 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a POST to http://xdomain.socialal.ly/echo should receive json response on cross domain',
+    it('a POST to http://127.0.0.1:9080/echo should receive json response on cross domain',
       function(done) {
         var callback = function(response) {
           assert(response);
           done();
         }
         var opts = {
-          url: 'http://xdomain.socialal.ly/echo',
+          url: 'http://127.0.0.1:9080/echo',
           method: 'post',
           type: 'json',
           headers: {

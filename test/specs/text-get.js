@@ -22,7 +22,7 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a GET to http://xdomain.socialal.ly/text/echo should receive json response on cross domain',
+    it('a GET to http://127.0.0.1:9080/text/echo should receive json response on cross domain',
       function(done) {
         var callback = function(response) {
           response.data = JSON.parse(response.data);
@@ -30,7 +30,7 @@ define(function(require) {
           done();
         }
         var opts = {
-          url: 'http://xdomain.socialal.ly/text/echo',
+          url: 'http://127.0.0.1:9080/text/echo',
           type: 'text',
           data: JSON.stringify(packet),
           callback: callback,

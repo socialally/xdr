@@ -18,14 +18,14 @@ define(function(require) {
         oninfo(info);
       }
     );
-    it('a GET to http://xdomain.socialal.ly/static should receive json response on cross domain',
+    it('a GET to http://127.0.0.1:9080/static should receive json response on cross domain',
       function(done) {
         var callback = function(response) {
           assert(response);
           done();
         }
         var opts = {
-          url: 'http://xdomain.socialal.ly/static',
+          url: 'http://127.0.0.1:9080/static',
           type: 'json',
           callback: callback
         };
