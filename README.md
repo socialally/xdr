@@ -40,6 +40,8 @@ Table of Contents
 Cross Domain Ajax
 =================
 
+> `Stability: unstable`.
+
 A UMD cross-domain Ajax implementation.
 
 ## Install
