@@ -2,7 +2,6 @@
   "name": "xdr",
   "description": "Cross-browser and cross-domain ajax implementation",
   "version": "0.5.2",
-  "stability": "unstable",
   "author": "muji <noop@xpm.io>",
   "main": "lib/ajax.js",
   "repository": {
@@ -56,10 +55,6 @@
     "toc": "Table of Contents",
     "base": "https://github.com/tmpfs/xdr",
     "partial": [
-      {
-        "ref": "stability",
-        "format": "> `Stability: %s`"
-      },
       {
         "inc": [
           "introduction.md",
