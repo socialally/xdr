@@ -7,7 +7,7 @@
   "main": "lib/ajax.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/socialally/xdr.git"
+    "url": "git://github.com/tmpfs/xdr.git"
   },
   "devDependencies": {
     "browser-sync": "~2.8.2",
@@ -54,7 +54,7 @@
     "require": "lib",
     "links": "links.md",
     "toc": "Table of Contents",
-    "base": "https://github.com/socialally/xdr",
+    "base": "https://github.com/tmpfs/xdr",
     "partial": [
       {
         "ref": "stability",
