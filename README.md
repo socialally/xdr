@@ -59,7 +59,7 @@ Use this library if you need to support IE8 (cross-domain) and want robust error
 
 ## Server Implementation
 
-The server must at a minimum send the appropriate headers for CORS support, see [server.js](https://github.com/tmpfs/xdrlib/server.js) for example headers.
+The server must at a minimum send the appropriate headers for CORS support, see [server.js](https://github.com/socialally/xdrlib/server.js) for example headers.
 
 In addition, in order to support the `XDomainRequest` object for IE 8/9 the server must process requests *that do not contain a Content-Type header* and the client must know the type of data the server responds with. 
 
@@ -332,7 +332,7 @@ Run the headless test suite using [phantomjs][]:
 npm test
 ```
 
-To run the tests in a browser context open [test/index.html](https://github.com/tmpfs/xdr/blob/master/test/index.html) or use the server `npm start`.
+To run the tests in a browser context open [test/index.html](https://github.com/socialally/xdr/blob/master/test/index.html) or use the server `npm start`.
 
 ### Start
 
