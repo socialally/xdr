@@ -3,7 +3,7 @@ var assert = require('../util/assert')
   , ajax = require('ajax')
   , packet = {greeting: 'hello', number: 10};
 
-describe('xdr:', function() {
+describe('xdr (json):', function() {
   it('a POST to /echo should receive json response on same domain',
     function(done) {
       var callback = function(response) {
@@ -14,9 +14,9 @@ describe('xdr:', function() {
         url: 'http://localhost:9080/echo',
         method: 'post',
         type: 'json',
-        headers: {
-          'content-type': 'application/json'
-        },
+        //headers: {
+          //'content-type': 'application/json'
+        //},
         data: packet,
         callback: callback
       };
@@ -34,9 +34,9 @@ describe('xdr:', function() {
         url: 'http://127.0.0.1:9080/echo',
         method: 'post',
         type: 'json',
-        headers: {
-          'content-type': 'application/json'
-        },
+        //headers: {
+          //'content-type': 'application/json'
+        //},
         data: packet,
         callback: callback
       };
